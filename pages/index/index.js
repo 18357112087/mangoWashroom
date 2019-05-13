@@ -5,47 +5,49 @@
  const AVLeanCloud = require('../../utils/av-weapp-min-leancloud.js');
 
 const MarkerHelper = require('../../model/MarkersHelper.js')
-
+const QQMapSDK = require('../../model/qqMapSDK.js')
 MarkerHelper.downloadMarker()
-
 Page({
   globalData: {
     user: {
-
     }
-
   },
   data: {
-    scale: 18,
+    scale: 17,
     latitude: 30.216804,
     longitude: 120.233276,
-    //markers: [],
+    userLocation: { "latitude": 0,"longitude":0},
+    markers: [],
   },
 // 页面加载
   onLoad: function (options) {
-
-    
-
     // 1.获取定时器，用于判断是否已经在计费
     this.timer = options.timer;
-   
-    this.setData({
-        })
-
+    var that = this
     // 2.获取并设置当前位置经纬度
     wx.getLocation({
       type: "gcj02",
       success: (res) => {
-      
         this.setData({
           longitude: res.longitude,
           latitude: res.latitude,
-          // latitude:30,
-          // longtitude:120.3,
-          markers: MarkerHelper.newMarkers
+          userLocation:{
+            "latitude":res.latitude,
+            "longitude": res.longitude}
+          // markers: MarkerHelper.newMarkers,
+          // markers: QQMapSDK.newMarkers
+        })
+        QQMapSDK.qqMapSDKSearch('厕所', that.data.userLocation, function () {
+          that.setData({
+            //markers: MarkerHelper.newMarkers,
+            markers: QQMapSDK.newMarkers
+          })
+
         })
       }
-    }),
+    })
+   
+   
 
     // 3.设置地图控件的位置及大小，通过设备宽高定位
     wx.getSystemInfo({
@@ -108,48 +110,48 @@ Page({
           }]
         })
       }
-    }),
+    })
  
     // 4.请求服务器，显示附近的单车，用marker标记
-    wx.request({
+    // wx.request({
       
-      url: 'https://www.easy-mock.com/mock/59098d007a878d73716e966f/ofodata/biyclePosition',
-      data: {},
-      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-      // header: {}, // 设置请求的 header
-      success: (res) => {
+    //   url: 'https://www.easy-mock.com/mock/59098d007a878d73716e966f/ofodata/biyclePosition',
+    //   data: {},
+    //   method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+    //   // header: {}, // 设置请求的 header
+    //   success: (res) => {
      
-        console.log("haha")
-            //markers:this.createMarker(newPoint)
-            // markers:this.getBikeMarker
-            //markers: res.data.data
-        this.setData({
+    //     console.log("haha")
+    //         //markers:this.createMarker(newPoint)
+    //         // markers:this.getBikeMarker
+    //         //markers: res.data.data
+    //     this.setData({
           
-          // markers: [{
-          //   id: "1",
-          //   latitude: newPoint.latitude,
-          //   longitude: newPoint.longitude,
-          //   width: 50,
-          //   height: 50,
-          //   iconPath: "../../images/markers.png",
-          //   title: "哪里"
+    //       // markers: [{
+    //       //   id: "1",
+    //       //   latitude: newPoint.latitude,
+    //       //   longitude: newPoint.longitude,
+    //       //   width: 50,
+    //       //   height: 50,
+    //       //   iconPath: "../../images/markers.png",
+    //       //   title: "哪里"
 
-          // }]
-         //markers:newMarkers,
+    //       // }]
+    //      //markers:newMarkers,
       
-        })
+    //     })
 
     
       
       
-      },
-      fail: function(res) {
-        // fail
-      },
-      complete: function(res) {
-        // complete
-      }
-    })
+    //   },
+    //   fail: function(res) {
+    //     // fail
+    //   },
+    //   complete: function(res) {
+    //     // complete
+    //   }
+    // })
   },
 // 页面显示
   onShow: function(){
@@ -220,20 +222,32 @@ Page({
   
 // 地图视野改变事件
   bindregionchange: function(e){
+    console.log(e)
+    var that = this
     // 拖动地图，获取附件单车位置
     if(e.type == "begin"){
-      wx.request({
-        url: 'https://www.easy-mock.com/mock/59098d007a878d73716e966f/ofodata/biyclePosition',
-        data: {},
-        method: 'GET', 
-        success: (res) => {
-          this.setData({
-           // _markers: res.data.data
-          })
-        }
-      })
+     
+      // wx.request({
+      //   url: 'https://www.easy-mock.com/mock/59098d007a878d73716e966f/ofodata/biyclePosition',
+      //   data: {},
+      //   method: 'GET', 
+      //   success: (res) => {
+      //     this.setData({
+      //      // _markers: res.data.data
+      //     })
+      //   }
+      // })
+
     // 停止拖动，显示单车位置
     }else if(e.type == "end"){
+      QQMapSDK.qqMapSDKSearch('厕所', this.data.userLocation,function () {
+        console.log('完成拖动开始搜索厕所')
+        that.setData({
+          //markers: MarkerHelper.newMarkers,
+          markers: QQMapSDK.newMarkers
+        })
+
+      })
         this.setData({
           //markers: this.data._markers
         })
