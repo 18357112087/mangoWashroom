@@ -9,7 +9,8 @@ var newMarkers = []
 function parseWashroomData(results){
  
   for (let result of results.data) {
-    //console.log(result)
+    
+    console.log(result)
    let newMarker = {
      id: result.id,
      latitude: result.location.lat,
@@ -17,7 +18,9 @@ function parseWashroomData(results){
      width: 20,
      height: 20,
      iconPath: "../../images/washroomLogo.png",
-     title: result.title
+     title: result.title +'\n' +result.address,
+     //address:result.address
+
   }
     newMarkers.push(newMarker)
   }
@@ -32,8 +35,6 @@ module.exports.qqMapSDKSearch = function (searchWord,loc,fn) {
       parseWashroomData(res)
       console.log(res)
       fn()
-     
-      
     },
     fail: function (res) {
       console.log(res);

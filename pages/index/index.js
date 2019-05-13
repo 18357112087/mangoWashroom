@@ -1,9 +1,5 @@
 //index.js
-//获取应用实例
-//ping "sm7wy1mx.api.lncld.net"
-
  const AVLeanCloud = require('../../utils/av-weapp-min-leancloud.js');
-
 const MarkerHelper = require('../../model/MarkersHelper.js')
 const QQMapSDK = require('../../model/qqMapSDK.js')
 MarkerHelper.downloadMarker()
@@ -18,6 +14,19 @@ Page({
     longitude: 120.233276,
     userLocation: { "latitude": 0,"longitude":0},
     markers: [],
+    polyline: [{
+      points: [{
+        longitude: 30.216804,
+        latitude: 120.233276
+      }, {
+          longitude: 30.216804,
+          latitude: 120.233276,
+      }],
+      color: "#FF0000DD",
+      width: 1,
+      dottedLine: true
+    }],
+    scale: 18
   },
 // 页面加载
   onLoad: function (options) {
@@ -46,9 +55,6 @@ Page({
         })
       }
     })
-   
-   
-
     // 3.设置地图控件的位置及大小，通过设备宽高定位
     wx.getSystemInfo({
       success: (res) => {
@@ -111,47 +117,6 @@ Page({
         })
       }
     })
- 
-    // 4.请求服务器，显示附近的单车，用marker标记
-    // wx.request({
-      
-    //   url: 'https://www.easy-mock.com/mock/59098d007a878d73716e966f/ofodata/biyclePosition',
-    //   data: {},
-    //   method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-    //   // header: {}, // 设置请求的 header
-    //   success: (res) => {
-     
-    //     console.log("haha")
-    //         //markers:this.createMarker(newPoint)
-    //         // markers:this.getBikeMarker
-    //         //markers: res.data.data
-    //     this.setData({
-          
-    //       // markers: [{
-    //       //   id: "1",
-    //       //   latitude: newPoint.latitude,
-    //       //   longitude: newPoint.longitude,
-    //       //   width: 50,
-    //       //   height: 50,
-    //       //   iconPath: "../../images/markers.png",
-    //       //   title: "哪里"
-
-    //       // }]
-    //      //markers:newMarkers,
-      
-    //     })
-
-    
-      
-      
-    //   },
-    //   fail: function(res) {
-    //     // fail
-    //   },
-    //   complete: function(res) {
-    //     // complete
-    //   }
-    // })
   },
 // 页面显示
   onShow: function(){
@@ -218,8 +183,6 @@ Page({
       default: break;
     }
   },
-
-  
 // 地图视野改变事件
   bindregionchange: function(e){
     console.log(e)
@@ -227,21 +190,11 @@ Page({
     // 拖动地图，获取附件单车位置
     if(e.type == "begin"){
      
-      // wx.request({
-      //   url: 'https://www.easy-mock.com/mock/59098d007a878d73716e966f/ofodata/biyclePosition',
-      //   data: {},
-      //   method: 'GET', 
-      //   success: (res) => {
-      //     this.setData({
-      //      // _markers: res.data.data
-      //     })
-      //   }
-      // })
-
     // 停止拖动，显示单车位置
     }else if(e.type == "end"){
       QQMapSDK.qqMapSDKSearch('厕所', this.data.userLocation,function () {
         console.log('完成拖动开始搜索厕所')
+        console.log(QQMapSDK.newMarkers)
         that.setData({
           //markers: MarkerHelper.newMarkers,
           markers: QQMapSDK.newMarkers
@@ -258,7 +211,15 @@ Page({
     console.log(e);
     let _markers = this.data.markers;
     let markerId = e.markerId;
-    let currMaker = _markers[markerId];
+    var currMaker
+    for (let _marker of _markers)
+    {
+      if (_marker.id === markerId )
+      {
+        currMaker = _marker;
+        break;
+      }
+    }
     this.setData({
       polyline: [{
         points: [{
