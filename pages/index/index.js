@@ -70,28 +70,28 @@ Page({
             },
             clickable: true
           },
-          {
-            id: 2,
-            iconPath: '/images/use.png',
-            position: {
-              left: res.windowWidth/2 - 45,
-              top: res.windowHeight - 100,
-              width: 90,
-              height: 90
-            },
-            clickable: true
-          },
-          {
-            id: 3,
-            iconPath: '/images/warn.png',
-            position: {
-              left: res.windowWidth - 70,
-              top: res.windowHeight - 80,
-              width: 50,
-              height: 50
-            },
-            clickable: true
-          },
+          // {
+          //   id: 2,
+          //   iconPath: '/images/use.png',
+          //   position: {
+          //     left: res.windowWidth/2 - 45,
+          //     top: res.windowHeight - 100,
+          //     width: 90,
+          //     height: 90
+          //   },
+          //   clickable: true
+          // },
+          // {
+          //   id: 3,
+          //   iconPath: '/images/warn.png',
+          //   position: {
+          //     left: res.windowWidth - 70,
+          //     top: res.windowHeight - 80,
+          //     width: 50,
+          //     height: 50
+          //   },
+          //   clickable: true
+          // },
           {
             id: 4,
             iconPath: '/images/marker.png',
@@ -132,48 +132,50 @@ Page({
       case 1: this.movetoPosition();
         break;
       // 点击立即用车，判断当前是否正在计费
-      case 2: if(this.timer === "" || this.timer === undefined){
-          // 没有在计费就扫码
-          wx.scanCode({
-            success: (res) => {
-              // 正在获取密码通知
-              wx.showLoading({
-                title: '正在获取密码',
-                mask: true
-              })
-              // 请求服务器获取密码和车号
-              wx.request({
-                url: 'https://www.easy-mock.com/mock/59098d007a878d73716e966f/ofodata/password',
-                data: {},
-                method: 'GET', 
-                success: function(res){
-                  // 请求密码成功隐藏等待框
-                  wx.hideLoading();
-                  // 携带密码和车号跳转到密码页
-                  wx.redirectTo({
-                    url: '../scanresult/index?password=' + res.data.data.password + '&number=' + res.data.data.number,
-                    success: function(res){
-                      wx.showToast({
-                        title: '获取密码成功',
-                        duration: 1000
-                      })
-                    }
-                  })           
-                }
-              })
-            }
-          })
-        // 当前已经在计费就回退到计费页
-        }else{
-          wx.navigateBack({
-            delta: 1
-          })
-        }  
+       case 2: 
+      // if(this.timer === "" || this.timer === undefined){
+      //     // 没有在计费就扫码
+      //     wx.scanCode({
+      //       success: (res) => {
+      //         // 正在获取密码通知
+      //         wx.showLoading({
+      //           title: '正在获取密码',
+      //           mask: true
+      //         })
+      //         // 请求服务器获取密码和车号
+      //         wx.request({
+      //           url: 'https://www.easy-mock.com/mock/59098d007a878d73716e966f/ofodata/password',
+      //           data: {},
+      //           method: 'GET', 
+      //           success: function(res){
+      //             // 请求密码成功隐藏等待框
+      //             wx.hideLoading();
+      //             // 携带密码和车号跳转到密码页
+      //             wx.redirectTo({
+      //               url: '../scanresult/index?password=' + res.data.data.password + '&number=' + res.data.data.number,
+      //               success: function(res){
+      //                 wx.showToast({
+      //                   title: '获取密码成功',
+      //                   duration: 1000
+      //                 })
+      //               }
+      //             })           
+      //           }
+      //         })
+      //       }
+      //     })
+      //   // 当前已经在计费就回退到计费页
+      //   }else{
+      //     wx.navigateBack({
+      //       delta: 1
+      //     })
+      //   }  
         break;
       // 点击保障控件，跳转到报障页
-      case 3: wx.navigateTo({
-          url: '../warn/index'
-        });
+      case 3:
+      //  wx.navigateTo({
+      //     url: '../warn/index'
+      //   });
         break;
       // 点击头像控件，跳转到个人中心
       case 5: wx.navigateTo({
