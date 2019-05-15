@@ -7,10 +7,10 @@
           
 
   
-    <cover-view class="play" bindtap="play">
+    <!-- <cover-view class="play" bindtap="play">
       <cover-image class="img" src="../../images/avatar.png" />
       <cover-view ><button class="daoZheQu">到这去</button></cover-view>
-    </cover-view>
+    </cover-view> -->
     
     
   </map>
