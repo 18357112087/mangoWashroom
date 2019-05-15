@@ -53,6 +53,9 @@ Page({
           })
 
         })
+
+       
+
       }
     })
     // 3.设置地图控件的位置及大小，通过设备宽高定位
@@ -113,7 +116,20 @@ Page({
               height: 45
             },
             clickable: true
-          }]
+            }
+            // , {
+            //   id: 6,
+            //   iconPath: '/images/location.png',
+            //   position: {
+            //     left: res.windowWidth/2-30,
+            //    top: res.windowHeight - 100,
+            //    width: 200,
+            //    height: 80
+            //   },
+            //   clickable: true
+            // }
+          
+          ]
         })
       }
     })
@@ -194,15 +210,15 @@ Page({
      
     // 停止拖动，显示单车位置
     }else if(e.type == "end"){
-      QQMapSDK.qqMapSDKSearch('厕所', this.data.userLocation,function () {
-        console.log('完成拖动开始搜索厕所')
-        console.log(QQMapSDK.newMarkers)
-        that.setData({
-          //markers: MarkerHelper.newMarkers,
-          markers: QQMapSDK.newMarkers
-        })
+      // QQMapSDK.qqMapSDKSearch('厕所', this.data.userLocation,function () {
+      //   console.log('完成拖动开始搜索厕所')
+      //   console.log(QQMapSDK.newMarkers)
+      //   that.setData({
+      //     //markers: MarkerHelper.newMarkers,
+      //     markers: QQMapSDK.newMarkers
+      //   })
 
-      })
+      // })
         this.setData({
           //markers: this.data._markers
         })
@@ -210,6 +226,8 @@ Page({
   },
 // 地图标记点击事件，连接用户位置和点击的单车位置
   bindmarkertap: function(e){
+    
+
     console.log(e);
     let _markers = this.data.markers;
     let markerId = e.markerId;
@@ -222,21 +240,29 @@ Page({
         break;
       }
     }
-    this.setData({
-      polyline: [{
-        points: [{
-          longitude: this.data.longitude,
-          latitude: this.data.latitude
-        }, {
-          longitude: currMaker.longitude,
-          latitude: currMaker.latitude
-        }],
-        color:"#FF0000DD",
-        width: 1,
-        dottedLine: true
-      }],
-      scale: 18
+    console.log(currMaker)
+    wx.openLocation({//​使用微信内置地图查看位置。
+      latitude: currMaker.latitude,//要去的纬度-地址
+      longitude: currMaker.longitude,//要去的经度-地址
+      name: currMaker.title,
+      address: currMaker.address,
+      scale:19
     })
+    // this.setData({
+    //   polyline: [{
+    //     points: [{
+    //       longitude: this.data.longitude,
+    //       latitude: this.data.latitude
+    //     }, {
+    //       longitude: currMaker.longitude,
+    //       latitude: currMaker.latitude
+    //     }],
+    //     color:"#FF0000DD",
+    //     width: 1,
+    //     dottedLine: true
+    //   }],
+    //   scale: 18
+    // })
   },
 // 定位函数，移动位置到地图中心
   movetoPosition: function(){

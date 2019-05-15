@@ -18,8 +18,8 @@ function parseWashroomData(results){
      width: 20,
      height: 20,
      iconPath: "../../images/washroomLogo.png",
-     title: result.title +'\n' +result.address,
-     //address:result.address
+     title: result.title ,
+     address:result.address
 
   }
     newMarkers.push(newMarker)

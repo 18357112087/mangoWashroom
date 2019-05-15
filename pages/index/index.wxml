@@ -1,4 +1,19 @@
 <!--index.wxml-->
 <view class="container">
-  <map id="ofoMap" latitude="{{latitude}}" longitude="{{longitude}}" scale="{{scale}}" bindregionchange="bindregionchange" polyline="{{polyline}}" markers="{{markers}}" controls="{{controls}}" bindmarkertap="bindmarkertap"  bindcontroltap="bindcontroltap" show-location/>
+  <map id="ofoMap"
+  latitude="{{latitude}}" longitude="{{longitude}}" scale="{{scale}}" bindregionchange="bindregionchange" polyline="{{polyline}}" markers="{{markers}}" controls="{{controls}}" bindmarkertap="bindmarkertap"  bindcontroltap="bindcontroltap" show-location>
+  
+         
+          
+
+  
+    <cover-view class="play" bindtap="play">
+      <cover-image class="img" src="../../images/avatar.png" />
+      <cover-view ><button class="daoZheQu">到这去</button></cover-view>
+    </cover-view>
+    
+    
+  </map>
+  
+  
 </view>
