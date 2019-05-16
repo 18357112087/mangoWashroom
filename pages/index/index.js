@@ -161,6 +161,12 @@ Page({
     
 
   },
+  addComment(){
+     wx.navigateTo({
+          url: '../warn/index'
+        });
+
+  },
 // 页面显示
   onShow: function(){
     // 1.创建地图上下文，移动当前位置到地图中心

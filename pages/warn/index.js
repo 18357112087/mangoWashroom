@@ -2,6 +2,37 @@
 const AV = require('../../utils/av-weapp-min.js'); 
 Page({
   data:{
+    starDesc: '非常满意，无可挑剔',
+    stars: [{
+      lightImg: '/images/star_light.png',
+      blackImg: '/images/star_black.png',
+      flag: 1,
+      message: '非常不满意，各方面都很差'
+    }, {
+      lightImg: '/images/star_light.png',
+      blackImg: '/images/star_black.png',
+      flag: 1,
+      message: '不满意，比较差'
+    }, {
+      lightImg: '/images/star_light.png',
+      blackImg: '/images/star_black.png',
+      flag: 1,
+      message: '一般，还要改善'
+    }, {
+      lightImg: '/images/star_light.png',
+      blackImg: '/images/star_black.png',
+      flag: 1,
+      message: '比较满意，仍要改善'
+    }, {
+      lightImg: '/images/star_light.png',
+      blackImg: '/images/star_black.png',
+      flag: 1,
+      message: '非常满意，无可挑剔'
+    }],
+    assessLists: ['环境好', '干净', '蹲坑', '厕纸充足', '位置很好', '不拥挤', '空气清新', '坐便器'],
+  
+    name:"未赋值",
+    address:"未赋值",
     // 故障车周围环境图路径数组
     picUrls: [],
     // 故障车编号和备注
@@ -62,7 +93,7 @@ Page({
 // 页面加载
   onLoad:function(options){
     wx.setNavigationBarTitle({
-      title: '报障维修'
+      title: '添加评论'
     })
   },
 // 勾选故障类型，获取类型值存入checkboxValue

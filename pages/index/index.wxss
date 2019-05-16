@@ -41,11 +41,18 @@ expandSearchAreaButton{
   color:cornflowerblue;
 
 }
+addCommentButton{
+   left: 0;
+  right: 0;
+  top: 200;
+  color:cornflowerblue;
+
+}
 
 .canvas {
   
   width: 324px;
-  height: 104px;
+  height: 134px;
   bottom: 0;
   position: fixed;
   background-color: #fff;

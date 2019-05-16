@@ -21,7 +21,9 @@
     <cover-view>{{address}}</cover-view>
  <cover-view>
       <button class="navigationButton" bindtap="navigation">导航</button></cover-view>
-
+ <cover-view>
+   <button class="addCommentButton" bindtap="addComment">添加评论</button></cover-view>
+     
 </cover-view>
 
 
