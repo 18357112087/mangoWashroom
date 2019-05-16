@@ -110,17 +110,17 @@ Page({
             },
             clickable: true
           },
-          {
-            id: 5,
-            iconPath: '/images/avatar.png',
-            position: {
-              left: res.windowWidth - 68,
-              top: res.windowHeight - 155,
-              width: 45,
-              height: 45
-            },
-            clickable: true
-            }
+          // {
+          //   id: 5,
+          //   iconPath: '/images/avatar.png',
+          //   position: {
+          //     left: res.windowWidth - 68,
+          //     top: res.windowHeight - 155,
+          //     width: 45,
+          //     height: 45
+          //   },
+          //   clickable: true
+          //   }
             // , {
             //   id: 6,
             //   iconPath: '/images/location.png',
@@ -146,6 +146,19 @@ Page({
       address: this.data.currMaker.address,
       scale: 19
     })
+
+  },
+  expandSearchArea() {
+    QQMapSDK.qqMapSDKSearch('厕所', this.data.userLocation,function () {
+        console.log('扩大搜索范围')
+        console.log(QQMapSDK.newMarkers)
+        that.setData({
+          //markers: MarkerHelper.newMarkers,
+          markers: QQMapSDK.newMarkers
+        })
+
+      })
+    
 
   },
 // 页面显示

@@ -17,7 +17,7 @@ query.find().then(function (results) {
       longitude: 120,
       width: 50,
       height: 50,
-      iconPath: "../../images/washroomLogo.png",
+      iconPath: "../../images/washroomLogo2.png",
       title: "公厕"
     }
     newMarker.latitude = result.attributes.coordinate._latitude

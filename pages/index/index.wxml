@@ -2,8 +2,9 @@
 <view class="container">
   <map id="ofoMap"
   latitude="{{latitude}}" longitude="{{longitude}}" scale="{{scale}}" bindregionchange="bindregionchange" polyline="{{polyline}}" markers="{{markers}}" controls="{{controls}}" bindmarkertap="bindmarkertap"  bindcontroltap="bindcontroltap" show-location>
-  
-     
+  <!-- <cover-view>
+   <button class="expandSearchAreaButton" bindtap="expandSearchArea">扩大搜索范围</button></cover-view>
+      -->
           
 
   

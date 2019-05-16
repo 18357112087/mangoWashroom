@@ -15,9 +15,9 @@ function parseWashroomData(results){
      id: result.id,
      latitude: result.location.lat,
      longitude: result.location.lng,
-     width: 20,
-     height: 20,
-     iconPath: "../../images/washroomLogo.png",
+     width: 40,
+     height: 40,
+     iconPath: "../../images/washroomLogo2.png",
      title: result.title ,
      address:result.address
 
@@ -29,6 +29,8 @@ function parseWashroomData(results){
 // 调用接口
 module.exports.qqMapSDKSearch = function (searchWord,loc,fn) {
   qqmapsdk.search({
+    page_size:20,
+    auto_extend:1,
     keyword: searchWord,
     location: String(loc.latitude) + ',' + String(loc.longitude),
     success: function (res) {
