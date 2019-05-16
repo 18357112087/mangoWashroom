@@ -3,16 +3,23 @@
   <map id="ofoMap"
   latitude="{{latitude}}" longitude="{{longitude}}" scale="{{scale}}" bindregionchange="bindregionchange" polyline="{{polyline}}" markers="{{markers}}" controls="{{controls}}" bindmarkertap="bindmarkertap"  bindcontroltap="bindcontroltap" show-location>
   
-         
+     
           
 
   
-    <!-- <cover-view class="play" bindtap="play">
-      <cover-image class="img" src="../../images/avatar.png" />
-      <cover-view ><button class="daoZheQu">到这去</button></cover-view>
-    </cover-view> -->
+   
     
-    
+    <canvas canvas-id="canvas" class="canvas" style="opacity:{{canvasOpacity}}">
+      <text font-weight='bolder'>{{name}}\n</text>
+      <text>{{address}}</text>
+      <cover-view>
+      <button class="daoZheQu" bindtap="navigation">导航</button></cover-view>
+    </canvas>
+
+
+
+
+
   </map>
   
   

@@ -20,13 +20,53 @@
   margin: 5px auto;
 }
 .play {
-  left: 320px;
-  top: 320px;
+  left: 120px;
+  top: 120px;
+  bottom: 0;
   margin: 5px auto
+  justify-content："center"
 }
-.daoZheQu{
-  left: 32px;
-  top: 32px;
-  margin: 5px auto
+.daoZheQu {
+  left: 0;
+  right: 0;
+  top: 200;
+  color:cornflowerblue;
+ 
+  
+  
+  
+  opacity:1
 
+}
+
+.canvas {
+ 
+  width: 324px;
+  height: 104px;
+  bottom: 0;
+  position: fixed;
+  background-color: #fff;
+}
+
+.cover-view {
+  margin-left: 52px;
+  margin-top: 20px;
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  background-color: #1AAD19;
+  color: #fff;
+}
+
+.image-cnt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.cover-image {
+  width: 50px;
+  height: 50px;
 }

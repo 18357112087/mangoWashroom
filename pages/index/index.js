@@ -9,6 +9,10 @@ Page({
     }
   },
   data: {
+    canvasOpacity:0,
+    currMaker:{},
+    name:"",
+    address:"",
     scale: 17,
     latitude: 30.216804,
     longitude: 120.233276,
@@ -67,7 +71,7 @@ Page({
             iconPath: '/images/location.png',
             position: {
               left: 20,
-              top: res.windowHeight - 80,
+              top: res.windowHeight/2+95,
               width: 50,
               height: 50
             },
@@ -133,6 +137,16 @@ Page({
         })
       }
     })
+  },
+  navigation() {
+    wx.openLocation({//​使用微信内置地图查看位置。
+      latitude: this.data.currMaker.latitude,//要去的纬度-地址
+      longitude: this.data.currMaker.longitude,//要去的经度-地址
+      name: this.data.currMaker.title,
+      address: this.data.currMaker.address,
+      scale: 19
+    })
+
   },
 // 页面显示
   onShow: function(){
@@ -226,28 +240,24 @@ Page({
   },
 // 地图标记点击事件，连接用户位置和点击的单车位置
   bindmarkertap: function(e){
-    
-
     console.log(e);
     let _markers = this.data.markers;
     let markerId = e.markerId;
-    var currMaker
     for (let _marker of _markers)
     {
       if (_marker.id === markerId )
       {
-        currMaker = _marker;
+        this.data.currMaker = _marker;
         break;
       }
     }
-    console.log(currMaker)
-    wx.openLocation({//​使用微信内置地图查看位置。
-      latitude: currMaker.latitude,//要去的纬度-地址
-      longitude: currMaker.longitude,//要去的经度-地址
-      name: currMaker.title,
-      address: currMaker.address,
-      scale:19
+    this.setData({
+      canvasOpacity:0.8,
+      name: this.data.currMaker.title,
+      address: this.data.currMaker.address,
     })
+    console.log(this.data.currMaker)
+    
     // this.setData({
     //   polyline: [{
     //     points: [{
@@ -264,6 +274,7 @@ Page({
     //   scale: 18
     // })
   },
+  
 // 定位函数，移动位置到地图中心
   movetoPosition: function(){
     this.mapCtx.moveToLocation();
