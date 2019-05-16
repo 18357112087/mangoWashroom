@@ -7,17 +7,21 @@
           
 
   
-   
-    
-    <canvas canvas-id="canvas" class="canvas" style="opacity:{{canvasOpacity}}">
+
+  
+    <!-- <canvas canvas-id="canvas" class="canvas" style="opacity:{{canvasOpacity}}">
       <text font-weight='bolder'>{{name}}\n</text>
       <text>{{address}}</text>
       <cover-view>
       <button class="daoZheQu" bindtap="navigation">导航</button></cover-view>
-    </canvas>
+    </canvas> -->
+    <cover-view class="canvas" style="opacity:{{canvasOpacity}}">
+    <cover-view>{{name}}\n</cover-view>
+    <cover-view>{{address}}</cover-view>
+ <cover-view>
+      <button class="navigationButton" bindtap="navigation">导航</button></cover-view>
 
-
-
+</cover-view>
 
 
   </map>

@@ -30,7 +30,7 @@ Page({
       width: 1,
       dottedLine: true
     }],
-    scale: 18
+    scale: 17
   },
 // 页面加载
   onLoad: function (options) {
@@ -217,7 +217,7 @@ Page({
   },
 // 地图视野改变事件
   bindregionchange: function(e){
-    console.log(e)
+   // console.log(e)
     var that = this
     // 拖动地图，获取附件单车位置
     if(e.type == "begin"){
@@ -240,7 +240,7 @@ Page({
   },
 // 地图标记点击事件，连接用户位置和点击的单车位置
   bindmarkertap: function(e){
-    console.log(e);
+    //console.log(e);
     let _markers = this.data.markers;
     let markerId = e.markerId;
     for (let _marker of _markers)
@@ -252,12 +252,12 @@ Page({
       }
     }
     this.setData({
-      canvasOpacity:0.8,
+      canvasOpacity:0.9,
       name: this.data.currMaker.title,
       address: this.data.currMaker.address,
     })
     console.log(this.data.currMaker)
-    
+    console.log(this.data.canvasOpacity)
     // this.setData({
     //   polyline: [{
     //     points: [{

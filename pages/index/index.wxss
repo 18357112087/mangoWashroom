@@ -26,26 +26,26 @@
   margin: 5px auto
   justify-content："center"
 }
-.daoZheQu {
+.navigationButton {
   left: 0;
   right: 0;
   top: 200;
   color:cornflowerblue;
  
-  
-  
-  
-  opacity:1
 
 }
 
 .canvas {
- 
+  
   width: 324px;
   height: 104px;
   bottom: 0;
   position: fixed;
   background-color: #fff;
+  margin-left: 20px;
+  margin-right: 20px;
+  align-items: center;
+  justify-content: center;
 }
 
 .cover-view {
