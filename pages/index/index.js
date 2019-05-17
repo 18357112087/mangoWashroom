@@ -2,7 +2,9 @@
  const AVLeanCloud = require('../../utils/av-weapp-min-leancloud.js');
 const MarkerHelper = require('../../model/MarkersHelper.js')
 const QQMapSDK = require('../../model/qqMapSDK.js')
-MarkerHelper.downloadMarker()
+//MarkerHelper.downloadMarker()
+var app = getApp();
+
 Page({
   globalData: {
     user: {
@@ -277,21 +279,10 @@ Page({
     })
     console.log(this.data.currMaker)
     console.log(this.data.canvasOpacity)
-    // this.setData({
-    //   polyline: [{
-    //     points: [{
-    //       longitude: this.data.longitude,
-    //       latitude: this.data.latitude
-    //     }, {
-    //       longitude: currMaker.longitude,
-    //       latitude: currMaker.latitude
-    //     }],
-    //     color:"#FF0000DD",
-    //     width: 1,
-    //     dottedLine: true
-    //   }],
-    //   scale: 18
-    // })
+    
+    //储存到全局变量
+    app.currentMarker=this.data.currMaker
+    
   },
   
 // 定位函数，移动位置到地图中心

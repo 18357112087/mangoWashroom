@@ -1,5 +1,7 @@
 // pages/wallet/index.js
 const AV = require('../../utils/av-weapp-min.js'); 
+var app = getApp();
+
 Page({
   data:{
     starDesc: '非常满意，无可挑剔',
@@ -29,7 +31,8 @@ Page({
       flag: 1,
       message: '非常满意，无可挑剔'
     }],
-    assessLists: ['环境好', '干净', '蹲坑', '厕纸充足', '位置很好', '不拥挤', '空气清新', '坐便器'],
+    // assessLists: [{ comment: '环境好', isSelected: false }, [{ comment: '干净', '蹲坑', '厕纸充足', '位置很好', '不拥挤', '空气清新', '坐便器'],
+    assessLists: [{ comment: '环境好', isSelected: false }, { comment: '干净', isSelected: false }, { comment: '蹲坑', isSelected: false }, { comment: '厕纸充足', isSelected: false }, { comment: '位置很好', isSelected: false }, { comment: '不拥挤', isSelected: false }, { comment: '空气清新', isSelected: false }, { comment: '坐便器' ,isSelected: false }],
   
     name:"未赋值",
     address:"未赋值",
@@ -90,10 +93,39 @@ Page({
       }
     ]
   },
+  pressedTheTag(e){
+    console.log(e)
+
+  },
+  // 选择评价星星
+  starClick: function (e) {
+    var that = this;
+    for (var i = 0; i < that.data.stars.length; i++) {
+      var allItem = 'stars[' + i + '].flag';
+      that.setData({
+        [allItem]: 2
+      })
+    }
+    var index = e.currentTarget.dataset.index;
+    for (var i = 0; i <= index; i++) {
+      var item = 'stars[' + i + '].flag';
+      that.setData({
+        [item]: 1
+      })
+    }
+    this.setData({
+      starDesc: this.data.stars[index].message
+    })
+  },
 // 页面加载
   onLoad:function(options){
     wx.setNavigationBarTitle({
       title: '添加评论'
+    })
+    //从全局数据中获取当前用户选择的厕所
+    this.setData({
+      name: app.currentMarker.title,
+      address:app.currentMarker.address
     })
   },
 // 勾选故障类型，获取类型值存入checkboxValue
@@ -168,7 +200,7 @@ Page({
     }
     
   },
-// 选择故障车周围环境图 拍照或选择相册
+// 选择周围环境图 拍照或选择相册
   bindCamera: function(){
     wx.chooseImage({
       count: 4, 

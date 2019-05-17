@@ -19,5 +19,10 @@ AVLeanCloud.init({
 })
 
 App({
+  globalData:{
+
+    currentMarker:{}
+
+    }
   
 })
