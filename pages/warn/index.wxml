@@ -10,8 +10,11 @@
       </view>
       <view class='star-desc'>{{starDesc}}</view>
     </view>
+
+ <button bindtap="pressedTheButton">aaa</button>
     <view class='assess-list'>
-      <view class='item-assess' wx:for="{{assessLists}}" wx:key="" bindtap='pressedTheTag'>{{index}}:{{item.comment}}</view>
+   
+      <view class='item-assess' wx:for="{{assessLists}}" wx:key="" bindtap="pressedTheTag">{{index}}:{{item.comment}}</view>
     </view>
 
 

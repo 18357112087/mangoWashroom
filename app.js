@@ -21,7 +21,7 @@ AVLeanCloud.init({
 App({
   globalData:{
 
-    currentMarker:{}
+    currentMarker:{title:"无",address:"无"}
 
     }
   

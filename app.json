@@ -1,8 +1,8 @@
 {
   "pages": [
-    
+      "pages/warn/index",
     "pages/index/index",
-    "pages/warn/index",
+  
     "pages/scanresult/index",
     "pages/billing/index",
     "pages/my/index",

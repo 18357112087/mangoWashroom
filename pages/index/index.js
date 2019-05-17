@@ -12,7 +12,7 @@ Page({
   },
   data: {
     canvasOpacity:0,
-    currMaker:{},
+    currMaker: { title: "无", address: "无"},
     name:"",
     address:"",
     scale: 17,

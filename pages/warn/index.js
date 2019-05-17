@@ -1,7 +1,6 @@
 // pages/wallet/index.js
 const AV = require('../../utils/av-weapp-min.js'); 
 var app = getApp();
-
 Page({
   data:{
     starDesc: '非常满意，无可挑剔',
@@ -31,9 +30,7 @@ Page({
       flag: 1,
       message: '非常满意，无可挑剔'
     }],
-    // assessLists: [{ comment: '环境好', isSelected: false }, [{ comment: '干净', '蹲坑', '厕纸充足', '位置很好', '不拥挤', '空气清新', '坐便器'],
-    assessLists: [{ comment: '环境好', isSelected: false }, { comment: '干净', isSelected: false }, { comment: '蹲坑', isSelected: false }, { comment: '厕纸充足', isSelected: false }, { comment: '位置很好', isSelected: false }, { comment: '不拥挤', isSelected: false }, { comment: '空气清新', isSelected: false }, { comment: '坐便器' ,isSelected: false }],
-  
+    
     name:"未赋值",
     address:"未赋值",
     // 故障车周围环境图路径数组
@@ -49,52 +46,16 @@ Page({
     actionText: "拍照/相册",
     // 提交按钮的背景色，未勾选类型时无颜色
     btnBgc: "",
-    // 复选框的value，此处预定义，然后循环渲染到页面
-    itemsValue: [
-      {
-        checked: false,
-        value: "私锁私用",
-        color: "#b9dd08"
-      },
-      {
-        checked: false,
-        value: "车牌缺损",
-        color: "#b9dd08"
-      },
-      {
-        checked: false,
-        value: "轮胎坏了",
-        color: "#b9dd08"
-      },
-      {
-        checked: false,
-        value: "车锁坏了",
-        color: "#b9dd08"
-      },
-      {
-        checked: false,
-        value: "违规乱停",
-        color: "#b9dd08"
-      },
-      {
-        checked: false,
-        value: "密码不对",
-        color: "#b9dd08"
-      },
-      {
-        checked: false,
-        value: "刹车坏了",
-        color: "#b9dd08"
-      },
-      {
-        checked: false,
-        value: "其他故障",
-        color: "#b9dd08"
-      }
-    ]
+    // 评论tag的value，此处预定义，然后循环渲染到页面
+    assessLists: [{ comment: '环境好', isSelected: false }, { comment: '干净', isSelected: false }, { comment: '蹲坑', isSelected: false }, { comment: '厕纸充足', isSelected: false }, { comment: '位置很好', isSelected: false }, { comment: '不拥挤', isSelected: false }, { comment: '空气清新', isSelected: false }, { comment: '坐便器', isSelected: false }],
   },
+  pressedTheButton:function(e) {
+    console.log(e.target.dataset)
+
+  },
+  //评论tag的tap事件响应
   pressedTheTag(e){
-    console.log(e)
+    console.log(e.target.dataset)
 
   },
   // 选择评价星星

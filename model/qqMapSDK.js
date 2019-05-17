@@ -9,8 +9,6 @@ var newMarkers = []
 function parseWashroomData(results){
  
   for (let result of results.data) {
-    
-    console.log(result)
    let newMarker = {
      id: result.id,
      latitude: result.location.lat,
