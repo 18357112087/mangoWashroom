@@ -1,6 +1,6 @@
 <!--pages/warn/index.wxml-->
 <view class="container">
-<view>厕所名称:{{name}}\n</view>
+<view>厕所名称:{{title}}\n</view>
 <view>厕所地址:{{address}}</view>
 <view class='assess-body'>
     <view class='assess-title'>对厕所评价</view>
@@ -11,10 +11,12 @@
       <view class='star-desc'>{{starDesc}}</view>
     </view>
 
- <button bindtap="pressedTheButton">aaa</button>
+
     <view class='assess-list'>
    
-      <view class='item-assess' wx:for="{{assessLists}}" wx:key="" bindtap="pressedTheTag">{{index}}:{{item.comment}}</view>
+<view class='item-assess' wx:for='{{assessLists}}'       wx:for-index="index" wx:for-item="item" style='{{item.isSelected==true?"background-color:cornflowerblue;":""}} z-index:999;' bindtap='changColor' data-index='{{index}}' data-item='{{item}}'>{{item.comment}}</view>
+
+    
     </view>
 
 
@@ -37,7 +39,7 @@
 
 
 
-    <textarea maxlength="-1" placeholder='回复' placeholder-class='place-assess'></textarea>
+    <textarea maxlength="-1" placeholder='回复' placeholder-class='place-assess' bindinput="bindUserCommentInput"></textarea>
   </view>
   <!-- <view class='assess-submint'>提交评价</view> -->
 

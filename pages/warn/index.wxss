@@ -5,6 +5,11 @@
   box-sizing: border-box;
 }
 
+.selected{
+  background-color: #fff;
+  color: rgb(247, 181, 120);
+}
+
 .wrapper-item {
   height: 166rpx;
   width: 100%;

@@ -2,16 +2,9 @@
 //微信小程序账号密码
 
 var refreshFlag = false
-const AV = require('./utils/av-weapp-min.js'); 
- 
-AV.init({
-  appId: 'W2FdWmVqCtFwcQqwrcVO4f7b-gzGzoHsz', 
-  appKey: 'XANfrIaQ2VfrkXlvf4dXAMOf'
-})
-
 //leancloud app账号密码
-const AVLeanCloud = require('./utils/av-weapp-min-leancloud.js');
-AVLeanCloud.init({
+const AV = require('./utils/av-weapp-min-leancloud.js');
+AV.init({
   appId: 'W2FdWmVqCtFwcQqwrcVO4f7b-gzGzoHsz',
   appKey: 'XANfrIaQ2VfrkXlvf4dXAMOf'
   // appID: 'wxc6be225939b7321d',
@@ -20,9 +13,22 @@ AVLeanCloud.init({
 
 App({
   globalData:{
+    userInfo: {
+      avatarUrl: "",
+      nickName: "未登录",
+      code: ""
+    },
 
-    currentMarker:{title:"无",address:"无"}
+    currentMarker: {id:"",
+      title: "无", address: "无", latitude
+        :
+        0,
+longitude
+        :
+        0}
 
     }
+   
+
   
 })

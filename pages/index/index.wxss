@@ -1,4 +1,7 @@
 /**index.wxss**/
+.hiddenButtonContainer{
+  display: flex;
+}
 .container{
   position: relative;
   width: 100%;

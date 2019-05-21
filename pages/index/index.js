@@ -4,22 +4,45 @@ const MarkerHelper = require('../../model/MarkersHelper.js')
 const QQMapSDK = require('../../model/qqMapSDK.js')
 //MarkerHelper.downloadMarker()
 var app = getApp();
-
+var isEmptyObject = function (e) {
+  var temp;
+  for (temp in e)
+    return !1;
+  return !0
+}
 Page({
+  leanCloudUserData: {
+    user: {
+      nickname: "",
+      avatarUrl: "",
+    }
+  },
+  
   globalData: {
     user: {
     }
   },
   data: {
+    // 用户信息
+    userInfo: {
+      avatarUrl: "",
+      nickName: "未登录",
+      code: ""
+    },
+    bType: "primary", // 按钮类型
+    actionText: "登录", // 按钮文字提示
+    lock: false, //登录按钮状态，false表示未登录
     canvasOpacity:0,
     currMaker: { title: "无", address: "无"},
-    name:"",
+    title:"",
     address:"",
     scale: 17,
     latitude: 30.216804,
     longitude: 120.233276,
     userLocation: { "latitude": 0,"longitude":0},
-    markers: [],
+    washroommMarkers: [],
+    parkingLotMarkers:[],
+    markers:[],
     polyline: [{
       points: [{
         longitude: 30.216804,
@@ -36,6 +59,126 @@ Page({
   },
 // 页面加载
   onLoad: function (options) {
+    var that = this;
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo
+      })
+    } else if (this.data.canIUse) {
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
+        this.setData({
+          userInfo: res.userInfo
+        })
+      }
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo
+          })
+          that.checkSettingStatu();
+        },
+        fail: function () {
+          wx.showModal({
+            title: '用户未授权',
+            content: '如需正常使用该小程序功能，请按确定并在授权管理中选中“用户信息”，然后点按确定。最后再重新进入小程序即可正常使用。',
+            showCancel: false,
+            success: function (resbtn) {
+              if (resbtn.confirm) {
+                wx.openSetting({
+                  success: function success(resopen) {
+                    //  获取用户数据
+                    that.checkSettingStatu();
+                  }
+                });
+              }
+            }
+          })
+        }
+      })
+    }
+    // wx.getStorage({
+    //   key: 'userInfo',
+    //   // 能获取到则显示用户信息，并保持登录状态，不能就什么也不做
+    //   success: (res) => {
+    //     wx.hideLoading();
+    //     this.setData({
+    //       userInfo: {
+    //         avatarUrl: res.data.userInfo.avatarUrl,
+    //         nickName: res.data.userInfo.nickName,
+    //       },
+    //       bType: res.data.bType,
+    //       actionText: res.data.actionText,
+    //       lock: true
+    //     })
+    //   }
+    // });
+    // // wx.checkSession({
+    // //   success() {
+    // //     // session_key 未过期，并且在本生命周期一直有效
+    // //   },
+    // //   fail() {
+    //     // session_key 已经失效，需要重新执行登录流程
+    //     //wx.login() // 重新登录
+
+    // wx.login({
+    //   success: (res) => {
+    //     console.log(res)
+    //     wx.hideLoading();
+    //     wx.getUserInfo({
+    //       withCredentials: false,
+    //       success: (res) => {
+    //         console.log(res)
+    //         console.log("haha"
+    //         )
+    //         AVLeanCloud.User.loginWithWeapp().then(user => {
+    //           this.leanCloudUserData.user.avatarUrl = res.userInfo.avatarUrl,
+    //             this.leanCloudUserData.user.nickname = res.userInfo.nickName
+
+    //           this.leanCloudUserData.user = user.toJSON();
+    //         }).catch(console.error);
+
+    //         //save in leanCloud
+    //         user.set(res.userInfo).save().then(user => {
+    //           // 成功，此时可在控制台中看到更新后的用户信息
+    //           //this.globalData.user = user.toJSON();
+    //         }).catch(console.error);
+    //         this.setData({
+    //           userInfo: {
+    //             avatarUrl: res.userInfo.avatarUrl,
+    //             nickName: res.userInfo.nickName
+    //           },
+    //           bType: "warn",
+    //           actionText: "退出登录"
+    //         });
+    //         // 存储用户信息到本地
+    //         wx.setStorage({
+    //           key: 'userInfo',
+    //           data: {
+    //             userInfo: {
+    //               avatarUrl: res.userInfo.avatarUrl,
+    //               nickName: res.userInfo.nickName
+    //             },
+    //             bType: "warn",
+    //             actionText: "退出登录"
+    //           },
+    //           success: function (res) {
+    //             console.log("存储成功")
+    //           }
+    //         })
+    //       }, fail: function (res) {
+    //         console.log('获取用户信息失败')
+    //         console.log(res)
+    //       }
+    //     })
+    //   }
+    
+    
+
     // 1.获取定时器，用于判断是否已经在计费
     this.timer = options.timer;
     var that = this
@@ -55,7 +198,16 @@ Page({
         QQMapSDK.qqMapSDKSearch('厕所', that.data.userLocation, function () {
           that.setData({
             //markers: MarkerHelper.newMarkers,
-            markers: QQMapSDK.newMarkers
+            markers: QQMapSDK.wholeMarkers,
+            washroommMarkers: QQMapSDK.washroomMarkers
+          })
+
+        })
+        QQMapSDK.qqMapSDKSearch('停车场', that.data.userLocation, function () {
+          that.setData({
+            //markers: MarkerHelper.newMarkers,
+            markers: QQMapSDK.wholeMarkers,
+            parkingLotMarkers: QQMapSDK.parkingLotMarkers
           })
 
         })
@@ -63,7 +215,9 @@ Page({
        
 
       }
-    })
+    }),
+    
+
     // 3.设置地图控件的位置及大小，通过设备宽高定位
     wx.getSystemInfo({
       success: (res) => {
@@ -140,11 +294,30 @@ Page({
       }
     })
   },
+  hideParkingLot() {
+    console.log("press hide park")
+    this.setData({
+      markers: []
+    })
+    this.setData({
+      markers:this.data.washroommMarkers
+    })
+  },
+  hideWashroom() {
+    console.log("press hide washroom")
+    this.setData({
+      markers: []
+    })
+   
+    this.setData({
+      markers: this.data.parkingLotMarkers
+    })
+  },
   navigation() {
     wx.openLocation({//​使用微信内置地图查看位置。
       latitude: this.data.currMaker.latitude,//要去的纬度-地址
       longitude: this.data.currMaker.longitude,//要去的经度-地址
-      name: this.data.currMaker.title,
+      title: this.data.currMaker.title,
       address: this.data.currMaker.address,
       scale: 19
     })
@@ -274,7 +447,7 @@ Page({
     }
     this.setData({
       canvasOpacity:0.9,
-      name: this.data.currMaker.title,
+      title: this.data.currMaker.title,
       address: this.data.currMaker.address,
     })
     console.log(this.data.currMaker)

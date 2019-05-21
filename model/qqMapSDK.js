@@ -6,6 +6,9 @@ var qqmapsdk = new QQMapWX({
 });
 
 var newMarkers = []
+var washroomMarkers=[]
+var parkingLotMarkers=[]
+var wholeMarkers=[]
 function parseWashroomData(results){
  
   for (let result of results.data) {
@@ -20,7 +23,26 @@ function parseWashroomData(results){
      address:result.address
 
   }
-    newMarkers.push(newMarker)
+    washroomMarkers.push(newMarker)
+    wholeMarkers.push(newMarker)
+  }
+}
+function parseParkingLotData(results) {
+
+  for (let result of results.data) {
+    let newMarker = {
+      id: result.id,
+      latitude: result.location.lat,
+      longitude: result.location.lng,
+      width: 40,
+      height: 40,
+      iconPath: "../../images/parkingLot.jpg",
+      title: result.title,
+      address: result.address
+
+    }
+    parkingLotMarkers.push(newMarker)
+    wholeMarkers.push(newMarker)
   }
 }
 
@@ -32,7 +54,10 @@ module.exports.qqMapSDKSearch = function (searchWord,loc,fn) {
     keyword: searchWord,
     location: String(loc.latitude) + ',' + String(loc.longitude),
     success: function (res) {
-      parseWashroomData(res)
+      if(searchWord=="厕所")
+        {parseWashroomData(res)}
+      if(searchWord=="停车场")
+        {parseParkingLotData(res) }
       console.log(res)
       fn()
     },
@@ -45,4 +70,7 @@ module.exports.qqMapSDKSearch = function (searchWord,loc,fn) {
   });
 
   }
+  module.exports.washroomMarkers=washroomMarkers
+  module.exports.parkingLotMarkers=parkingLotMarkers
+  module.exports.wholeMarkers=wholeMarkers
   module.exports.newMarkers = newMarkers
