@@ -16,7 +16,8 @@ App({
     userInfo: {
       avatarUrl: "",
       nickName: "未登录",
-      code: ""
+      code: "",
+      username:""
     },
 
     currentMarker: {id:"",
