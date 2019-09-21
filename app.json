@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/index/index",
+    
+    "pages/addWashroom/addWashroom",
     "pages/warn/index",
-
-  
     "pages/scanresult/index",
     "pages/billing/index",
     "pages/my/index",
@@ -14,7 +14,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#b9dd08",
-    "navigationBarTitleText": "芒果找厕",
+    "navigationBarTitleText": "芒果找厕所",
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",

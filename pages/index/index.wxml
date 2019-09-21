@@ -2,16 +2,20 @@
 <view class="container">
   <map id="ofoMap"
   latitude="{{latitude}}" longitude="{{longitude}}" scale="{{scale}}" bindregionchange="bindregionchange" polyline="{{polyline}}" markers="{{markers}}" controls="{{controls}}" bindmarkertap="bindmarkertap"  bindcontroltap="bindcontroltap" show-location>
-  <button open-type='getUserInfo' >获取授权</button>
+  <button open-type='getUserInfo' >点击厕所图标获取更多信息和导航</button>
   <!-- <cover-view>
    <button class="expandSearchAreaButton" bindtap="expandSearchArea">扩大搜索范围</button></cover-view>
       -->
       <cover-view class="hiddenButtonContainer">
       <button bindtap="hideParkingLot">只看厕所</button>
+      <button bindtap="addWashroom">添加厕所</button>
      <button bindtap="hideWashroom">只看停车场</button></cover-view>
-    <cover-view class="canvas" style="opacity:{{canvasOpacity}}">
-    <cover-view>{{title}}\n</cover-view>
-    <cover-view>{{address}}</cover-view>
+    <cover-view class="canvas"   hidden="{{hiddenName}}">
+
+<cover-view class="closeButtonContainer"> <cover-view decode="{{true}}" >{{title}}\t</cover-view><button class="closeButton" bindtap="closeTheBottomWindow">关闭</button></cover-view>
+   <cover-view>{{address}}</cover-view>
+   <cover-view>{{distance}}米\n</cover-view>
+    
  <cover-view>
       <button class="navigationButton" bindtap="navigation">导航</button></cover-view>
  <cover-view>

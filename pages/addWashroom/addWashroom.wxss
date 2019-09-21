@@ -101,3 +101,45 @@ addCommentButton{
   width: 50px;
   height: 50px;
 }
+.submit-btn
+{
+width:100%;
+color:green;
+position:fixed;
+bottom:0;
+/* background:green; */
+} 
+.action .action-input{
+	padding-left: 50rpx;
+	margin-top: 30rpx;
+	background-color: #fff;
+}
+.action .action-input input{
+	width: 90%;
+	padding-top: 40rpx;
+	padding-bottom: 40rpx;
+}
+.cover-input{
+  
+  width: 80%;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.9);
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-left: 15rpx;
+  padding-right: 15rpx;
+}
+.text{
+  
+  height: 32px;
+  line-height: 32px;
+}
+.input{
+  height: 32px;
+  line-height: 32px;
+  /* margin-top为text的高度，保持视觉上一致 */
+  margin-top: -32px; 
+}

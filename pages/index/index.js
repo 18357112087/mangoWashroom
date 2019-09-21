@@ -23,6 +23,9 @@ Page({
     }
   },
   data: {
+    //marker distance to the userLocation
+    distance:0,
+    hiddenName:true,
     // 用户信息
     userInfo: {
       avatarUrl: "",
@@ -282,6 +285,13 @@ Page({
       markers: this.data.parkingLotMarkers
     })
   },
+  ////添加厕所，导航到添加厕所界面
+  addWashroom() {
+    wx.navigateTo({
+      url: '../addWashroom/addWashroom'
+    })
+    
+  },
   navigation() {
     wx.openLocation({//​使用微信内置地图查看位置。
       latitude: this.data.currMaker.latitude,//要去的纬度-地址
@@ -354,8 +364,21 @@ Page({
         })
     }
   },
+  //按关闭关闭窗口
+  closeTheBottomWindow:function(e){
+    this.setData({
+      hiddenName:true
+    })
+    
+
+  },
 // 地图标记点击事件，连接用户位置和点击的单车位置
   bindmarkertap: function(e){
+    console.log(e)
+    var that = this
+    var start = this.data.userLocation
+    
+    
     //console.log(e);
     let _markers = this.data.markers;
     let markerId = e.markerId;
@@ -364,11 +387,21 @@ Page({
       if (_marker.id === markerId )
       {
         this.data.currMaker = _marker;
+        var dest = [{latitude:this.data.currMaker.latitude,longitude: this.data.currMaker.longitude}]
+        console.log(start)
+        console.log(dest)
+        QQMapSDK.calculateDistance(start,dest,function(){
+          console.log(QQMapSDK.dis[0])
+          that.setData({
+            distance:QQMapSDK.dis[0]
+          })
+        })
         break;
       }
     }
     this.setData({
-      canvasOpacity:0.9,
+      hiddenName: false,
+      
       title: this.data.currMaker.title,
       address: this.data.currMaker.address,
     })
