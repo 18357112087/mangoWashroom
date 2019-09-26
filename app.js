@@ -13,13 +13,13 @@ AV.init({
 
 App({
   globalData:{
+    washrooms: [],
     userInfo: {
       avatarUrl: "",
       nickName: "未登录",
       code: "",
       username:""
     },
-
     currentMarker: {id:"",
       title: "无", address: "无", latitude
         :

@@ -1,7 +1,7 @@
 {
   "pages": [
     "pages/index/index",
-    
+    "pages/washroomList/washroomList",
     "pages/addWashroom/addWashroom",
     "pages/warn/index",
     "pages/scanresult/index",
@@ -22,5 +22,29 @@
     "scope.userLocation": {
       "desc": "您的位置信息将帮助您寻找附近的厕所"
     }
+  },
+  "tabBar": {
+    "position": "bottom",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "地图",
+        "iconPath": "/images/location.png",
+        "selectedIconPath": "/images/location.png"
+      },
+      {
+        "pagePath": "pages/washroomList/washroomList",
+        "text": "列表",
+        "iconPath": "/images/washroomLogo2.png",
+        "selectedIconPath": "/images/washroomLogo2.png"
+      },
+      {
+        "pagePath": "pages/my/index",
+        "text": "我的",
+        "iconPath": "/images/avatar.png",
+        "selectedIconPath": "/images/avatar.png"
+      }
+    ]
   }
 }

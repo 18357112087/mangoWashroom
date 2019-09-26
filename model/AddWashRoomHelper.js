@@ -13,7 +13,9 @@ var backMessage = ""
 var Washroom = AV.Object.extend('Washroom')
 var washroom = new Washroom();
 // 设置数据内容
-
+module.exports.uploadWashroomToTecentCloud = function(){
+ 
+}
 
 module.exports.uploadWashroom = function (title,address, lat,lon) {
   washroom.set('title', title);
