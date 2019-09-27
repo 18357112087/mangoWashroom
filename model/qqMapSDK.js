@@ -4,7 +4,10 @@ var QQMapWX = require('../utils/qqMapSDK/qqmap-wx-jssdk.min.js');
 var qqmapsdk = new QQMapWX({
   key: 'LXJBZ-TMUKX-T4W4P-ZXQRI-HTCXZ-YNBPR'
 });
-
+const cloud = require('wx-server-sdk')
+cloud.init({
+  env: 'test-x1dzi'
+})
 var newMarkers = []
 var washroomMarkers=[]
 var parkingLotMarkers=[]
@@ -12,17 +15,16 @@ var wholeMarkers=[]
 var dis = [];
 //在Page({})中使用下列代码
 //事件触发，调用接口
-function getDataFromDataBase(){
+module.exports.getDataFromDataBase=function(){
+  
   // 1. 获取数据库引用
   const db = wx.cloud.database()
   // 2. 构造查询语句
   // collection 方法获取一个集合的引用
   // where 方法传入一个对象，数据库返回集合中字段等于指定值的 JSON 文档。API 也支持高级的查询条件（比如大于、小于、in 等），具体见文档查看支持列表
   // get 方法会触发网络请求，往数据库取数据
-  db.collection('books').where({
-    publishInfo: {
-      country: 'United States'
-    }
+  db.collection('Washrooms').where({
+    address:"三桥下"
   }).get({
     success: function (res) {
       // 输出 [{ "title": "The Catcher in the Rye", ... }]
