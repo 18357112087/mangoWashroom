@@ -1,10 +1,13 @@
-//const cloud = require('wx-server-sdk')
+const cloud = require('../utils/wx-server-sdk/index.js')
 // 引入SDK核心类
 var QQMapWX = require('../utils/qqMapSDK/qqmap-wx-jssdk.min.js');
 // 实例化API核心类
 var qqmapsdk = new QQMapWX({
   key: 'LXJBZ-TMUKX-T4W4P-ZXQRI-HTCXZ-YNBPR'
 });
+wx.cloud.init({
+  env: "mangowashroom - b83ab1"
+})
 
 var newMarkers = []
 var washroomMarkers=[]
