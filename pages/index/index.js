@@ -51,6 +51,7 @@ Page({
   },
 // 页面加载
   onLoad: function (options) {
+    //QQMapSDK.getDataFromDataBase()
     wx.getStorage({
       key: 'userInfo',
       // 能获取到则显示用户信息，并保持登录状态，不能就什么也不做

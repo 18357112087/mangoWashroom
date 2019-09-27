@@ -1,3 +1,4 @@
+//const cloud = require('wx-server-sdk')
 // 引入SDK核心类
 var QQMapWX = require('../utils/qqMapSDK/qqmap-wx-jssdk.min.js');
 // 实例化API核心类
@@ -12,7 +13,7 @@ var wholeMarkers=[]
 var dis = [];
 //在Page({})中使用下列代码
 //事件触发，调用接口
-function getDataFromDataBase(){
+module.exports.getDataFromDataBase = function(){
   // 1. 获取数据库引用
   const db = wx.cloud.database()
   // 2. 构造查询语句

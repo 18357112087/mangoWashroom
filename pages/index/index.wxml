@@ -7,9 +7,10 @@
    <button class="expandSearchAreaButton" bindtap="expandSearchArea">扩大搜索范围</button></cover-view>
       -->
       <cover-view class="hiddenButtonContainer">
-      <button bindtap="hideParkingLot">只看厕所</button>
+      <!-- <button bindtap="hideParkingLot">只看厕所</button> -->
       <button bindtap="addWashroom">添加厕所</button>
-     <button bindtap="hideWashroom">只看停车场</button></cover-view>
+     <!-- <button bindtap="hideWashroom">只看停车场</button> -->
+     </cover-view>
     <cover-view class="canvas"   hidden="{{hiddenName}}">
 
 <cover-view class="closeButtonContainer"> <cover-view decode="{{true}}" >{{title}}\t</cover-view><button class="closeButton" bindtap="closeTheBottomWindow">关闭</button></cover-view>
