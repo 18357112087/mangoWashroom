@@ -1,0 +1,22 @@
+{
+  "name": "mangowashroom",
+  "version": "1.0.0",
+  "description": "<img src=\"http://oht7mjuah.bkt.clouddn.com/%E9%A6%96%E9%A1%B5.png\" width=\"270\" height=\"480\"/> <img src=\"http://oht7mjuah.bkt.clouddn.com/timer-over.png\" width=\"270\" height=\"480\" /> <img src=\"http://oht7mjuah.bkt.clouddn.com/timer.png\" width=\"270\" height=\"480\" /> <img src=\"http://oht7mjuah.bkt.clouddn.com/wallet.png\" width=\"270\" height=\"480\" /> <img src=\"http://oht7mjuah.bkt.clouddn.com/charge.png\" width=\"270\" height=\"480\" /> <img src=\"http://oht7mjuah.bkt.clouddn.com/me.png\" width=\"270\" height=\"480\" /> <img src=\"http://oht7mjuah.bkt.clouddn.com/password.png\" width=\"270\" height=\"480\"/> <img src=\"http://oht7mjuah.bkt.clouddn.com/warn-fill.png\" width=\"270\" height=\"480\"/> <img src=\"http://oht7mjuah.bkt.clouddn.com/mark.png\" width=\"270\" height=\"480\"/>",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/18357112087/mangoWashroom.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/18357112087/mangoWashroom/issues"
+  },
+  "homepage": "https://github.com/18357112087/mangoWashroom#readme",
+  "dependencies": {
+    "wx-server-sdk": "^1.2.1"
+  }
+}

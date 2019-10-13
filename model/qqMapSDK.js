@@ -4,10 +4,11 @@ var QQMapWX = require('../utils/qqMapSDK/qqmap-wx-jssdk.min.js');
 var qqmapsdk = new QQMapWX({
   key: 'LXJBZ-TMUKX-T4W4P-ZXQRI-HTCXZ-YNBPR'
 });
-const cloud = require('wx-server-sdk')
-cloud.init({
-  env: 'test-x1dzi'
-})
+const cloud = require('../node_modules/wx-server-sdk')
+cloud.init()
+    // cloud.init({
+    //   env: 'zytry-41b1f6'
+    // })
 var newMarkers = []
 var washroomMarkers=[]
 var parkingLotMarkers=[]
