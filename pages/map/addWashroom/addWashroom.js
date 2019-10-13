@@ -1,6 +1,6 @@
 //index.js
- const AVLeanCloud = require('../../utils/av-weapp-min-leancloud.js');
-const AddWashroomHelper = require('../../model/AddWashRoomHelper.js')
+ const AVLeanCloud = require('../../../utils/av-weapp-min-leancloud.js');
+const AddWashroomHelper = require('../../../model/AddWashRoomHelper.js')
 //MarkerHelper.downloadMarker()
 var app = getApp();
 var isEmptyObject = function (e) {

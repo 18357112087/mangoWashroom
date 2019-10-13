@@ -1,1 +1,11 @@
 /* pages/washroomList/washroomList.wxss */
+layout_horizontal{
+  height: 100rpx;
+  display: flex;
+  /*row 横向  column 列表  */
+  flex-direction: row;
+  margin:20rpx
+}
+.navigationButton{
+  background-color: lightblue
+}

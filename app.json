@@ -2,14 +2,15 @@
   "pages": [
     "pages/index/index",
     "pages/washroomList/washroomList",
-    "pages/addWashroom/addWashroom",
-    "pages/warn/index",
-    "pages/scanresult/index",
-    "pages/billing/index",
-    "pages/my/index",
-    "pages/wallet/index",
-    "pages/charge/index",
-    "pages/logs/logs"
+    "pages/map/addWashroom/addWashroom",
+    "pages/me/warn/index",
+    "pages/me/scanresult/index",
+    "pages/me/billing/index",
+    "pages/me/my/index",
+    "pages/me/wallet/index",
+    "pages/me/charge/index",
+    "pages/me/logs/logs",
+    "pages/washroomList/warn/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -40,7 +41,7 @@
         "selectedIconPath": "/images/washroomLogo2.png"
       },
       {
-        "pagePath": "pages/my/index",
+        "pagePath": "pages/me/my/index",
         "text": "我的",
         "iconPath": "/images/avatar.png",
         "selectedIconPath": "/images/avatar.png"

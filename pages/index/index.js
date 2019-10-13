@@ -154,7 +154,7 @@ Page({
   ////添加厕所，导航到添加厕所界面
   addWashroom() {
     wx.navigateTo({
-      url: '../addWashroom/addWashroom'
+      url: '../map/addWashroom/addWashroom'
     })
   },
   navigation() {

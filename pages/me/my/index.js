@@ -1,5 +1,5 @@
 // pages/my/index.js
- const AVLeanCloud = require('../../utils/av-weapp-min-leancloud.js');
+ const AVLeanCloud = require('../../../utils/av-weapp-min-leancloud.js');
 const user = AVLeanCloud.User.current();
 // AVLeanCloud.User.loginWithWeapp().then(user => {
 //   this.data.user = user.toJSON();
