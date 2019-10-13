@@ -14,6 +14,7 @@ AV.init({
 App({
   globalData:{
     washrooms: [],
+    userLocation: { "latitude": 0, "longitude": 0 },
     userInfo: {
       avatarUrl: "",
       nickName: "未登录",

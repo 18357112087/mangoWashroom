@@ -51,7 +51,7 @@ Page({
   },
 // 页面加载
   onLoad: function (options) {
-    QQMapSDK.getDataFromDataBase()
+    //QQMapSDK.getDataFromDataBase()
     wx.getStorage({
       key: 'userInfo',
       // 能获取到则显示用户信息，并保持登录状态，不能就什么也不做
@@ -82,13 +82,19 @@ Page({
             "latitude":res.latitude,
             "longitude": res.longitude}
         })
+        app.globalData.userLocation = this.data.userLocation
         QQMapSDK.qqMapSDKSearch('厕所', that.data.userLocation, function () {
+          
           that.setData({
             //markers: MarkerHelper.newMarkers,
             markers: QQMapSDK.wholeMarkers,
             washroommMarkers: QQMapSDK.washroomMarkers
           })
+          console.log(that.data.markers)
+          console.log(that.data.washroommMarkers)
+
           app.globalData.washrooms = QQMapSDK.washroomMarkers
+          
         })
         // QQMapSDK.qqMapSDKSearch('停车场', that.data.userLocation, function () {
         //   that.setData({
@@ -99,8 +105,6 @@ Page({
         // })
       }
     }),
-    
-
     // 3.设置地图控件的位置及大小，通过设备宽高定位
     wx.getSystemInfo({
       success: (res) => {
@@ -146,7 +150,6 @@ Page({
     this.setData({
       markers: []
     })
-   
     this.setData({
       markers: this.data.parkingLotMarkers
     })
@@ -233,16 +236,12 @@ Page({
     this.setData({
       hiddenName:true
     })
-    
-
   },
 // 地图标记点击事件，连接用户位置和点击的单车位置
   bindmarkertap: function(e){
     console.log(e)
     var that = this
     var start = this.data.userLocation
-    
-    
     //console.log(e);
     let _markers = this.data.markers;
     let markerId = e.markerId;
@@ -251,21 +250,12 @@ Page({
       if (_marker.id === markerId )
       {
         this.data.currMaker = _marker;
-        var dest = [{latitude:this.data.currMaker.latitude,longitude: this.data.currMaker.longitude}]
-        console.log(start)
-        console.log(dest)
-        QQMapSDK.calculateDistance(start,dest,function(){
-          console.log(QQMapSDK.dis[0])
-          that.setData({
-            distance:QQMapSDK.dis[0]
-          })
-        })
         break;
       }
     }
     this.setData({
       hiddenName: false,
-      
+      distance: this.data.currMaker.distance,
       title: this.data.currMaker.title,
       address: this.data.currMaker.address,
     })

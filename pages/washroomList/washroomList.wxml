@@ -1,11 +1,11 @@
 <view class='container'>
   <block wx:for="{{washrooms}}" wx:key="item.id" bindtap='itemClick' data-index='{{item.id}}' data-id='{{item.id}}'wx:for-item="item">
     <view class='artImg' >
-      <image src='{{item.iconPath}}' ></image>
+      <!-- <image src='{{item.iconPath}}' ></image> -->
     <view >{{item.title}}</view> 
     <view>{{item.address}}</view>
     <view>活动：{{item.activity}}</view>
-    <view>距离:{{item.distance}}</view>
+    <view>距离:{{item.distance}}米</view>
     <button id='{{item.id}}'class="navigationButton" bindtap="navigation">导航</button>
         </view>
   </block>
