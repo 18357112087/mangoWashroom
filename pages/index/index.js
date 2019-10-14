@@ -94,6 +94,14 @@ Page({
           console.log(that.data.washroommMarkers)
 
           app.globalData.washrooms = QQMapSDK.washroomMarkers
+          // wx.showActionSheet({
+          //   itemList: ['A', 'B', 'C'],
+          //   success: function (res) {
+          //     if (!res.cancel) {
+          //       console.log(res.tapIndex)
+          //     }
+          //   }
+          // });
           
         })
         // QQMapSDK.qqMapSDKSearch('停车场', that.data.userLocation, function () {

@@ -17,7 +17,6 @@ var dis = [];
 //在Page({})中使用下列代码
 //事件触发，调用接口
 module.exports.getDataFromDataBase=function(){
-  
   // 1. 获取数据库引用
   const db = wx.cloud.database()
   // 2. 构造查询语句
@@ -32,7 +31,6 @@ module.exports.getDataFromDataBase=function(){
       console.log(res)
     }
   })
-
 }
 function calculateDistance(start, dest, fn){
   var _this = this;

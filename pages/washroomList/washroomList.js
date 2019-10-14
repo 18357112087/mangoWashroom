@@ -9,14 +9,10 @@ Page({
     // 数据源
     washrooms: [],
     distances:[]
-    
-    
   },
   /**
    * 生命周期函数--监听页面加载
    */
- 
-
   onLoad: function (options) {
     var array = [1, 4, -8, -3, 6, 12, 9, 8];
     console.log(app.globalData.washrooms)
@@ -26,19 +22,16 @@ Page({
     })
    let that = this
   },
-  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
   },
-
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
   },
-
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -76,7 +69,6 @@ Page({
     }
     // 打印数据
     console.log(item);
-
     wx.openLocation({//​使用微信内置地图查看位置。
       latitude: item.latitude,//要去的纬度-地址
       longitude: item.longitude,//要去的经度-地址
@@ -88,18 +80,12 @@ Page({
   },
   itemClick: function (e) {
     that = this
-
     // 获取点击条目id
-
     var index = parseInt(e.currentTarget.dataset.index);
-
     // 获取相应的数据
     console.log(index)
-
     // var item = that.data.oilStations[index]
-
     // // 打印数据
-
     // console.log(item);
 
   },
