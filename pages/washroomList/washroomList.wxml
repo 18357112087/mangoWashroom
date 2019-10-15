@@ -13,7 +13,7 @@
       <button id='{{item.id}}'class="navigationButton" bindtap="navigation">导航</button>
 
     </view>
-    <view>______________________________________</view>
+    <view class="divLine"></view>
   
      
   </block>
