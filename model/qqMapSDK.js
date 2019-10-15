@@ -6,7 +6,7 @@ var qqmapsdk = new QQMapWX({
   key: 'LXJBZ-TMUKX-T4W4P-ZXQRI-HTCXZ-YNBPR'
 });
 
-const cloud = require('wx-server-sdk')
+//const cloud = require('wx-server-sdk')
 // wx.cloud.init({
 //   env: "mangowashroom - b83ab1"
 // })
