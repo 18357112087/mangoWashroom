@@ -4,7 +4,6 @@ const AVLeanCloud = require('../utils/av-weapp-min-leancloud.js');
 var newMarkers = []
 
 function downloadMarker(){
- 
 var query = new AVLeanCloud.Query('Washroom');
 var point = new AVLeanCloud.GeoPoint(30.216804, 120.233276)
 query.withinKilometers('coordinate', point, 20.0);

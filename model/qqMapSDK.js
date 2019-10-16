@@ -101,7 +101,6 @@ function parseWashroomData(results,userLocation,fn){
   
 }
 function parseParkingLotData(results) {
-
   for (let result of results.data) {
     let newMarker = {
       id: result.id,
@@ -112,7 +111,6 @@ function parseParkingLotData(results) {
       iconPath: "../../images/parkingLot.jpg",
       title: result.title,
       address: result.address
-
     }
     parkingLotMarkers.push(newMarker)
     wholeMarkers.push(newMarker)

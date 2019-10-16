@@ -128,6 +128,17 @@ Page({
             },
             clickable: true
           },
+            {
+              id: 3,
+              iconPath: '/images/customerService.jpg',
+              position: {
+                left: res.windowWidth - 70,
+                top: res.windowHeight - 80,
+                width: 50,
+                height: 50
+              },
+              clickable: true
+            },
           {
             id: 4,
             iconPath: '/images/marker.png',
@@ -212,9 +223,9 @@ Page({
         break;
       // 点击保障控件，跳转到报障页
       case 3:
-      //  wx.navigateTo({
-      //     url: '../warn/index'
-      //   });
+       wx.navigateTo({
+          url: '../map/customerService/customerService'
+        });
         break;
       // 点击头像控件，跳转到个人中心
       case 5: wx.navigateTo({

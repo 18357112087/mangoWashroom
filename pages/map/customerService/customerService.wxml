@@ -1,0 +1,7 @@
+
+<block wx:for="{{commonQuestions}}" wx:key="index"bindtap='questionClick'data-index='{{item.id}}'data-id='{{item.id}}'wx:for-item="item">
+<view class="cell">{{item.question}}</view>
+<view class="divLine"></view>
+</block>
+
+<button open-type='contact' class='openDialog'>点击进入客服会话</button>

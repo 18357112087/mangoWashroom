@@ -10,7 +10,8 @@
     "pages/me/wallet/index",
     "pages/me/charge/index",
     "pages/me/logs/logs",
-    "pages/washroomList/warn/index"
+    "pages/washroomList/warn/index",
+"pages/map/customerService/customerService"
   ],
   "window": {
     "backgroundTextStyle": "light",
