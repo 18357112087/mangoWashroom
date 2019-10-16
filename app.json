@@ -1,8 +1,8 @@
 {
   "pages": [
+          "pages/map/addWashroom/addWashroom",
     "pages/index/index",
     "pages/washroomList/washroomList",
-    "pages/map/addWashroom/addWashroom",
     "pages/me/warn/index",
     "pages/me/scanresult/index",
     "pages/me/billing/index",

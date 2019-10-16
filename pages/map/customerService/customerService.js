@@ -4,7 +4,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    commonQuestions: [{ question: "常见问题" }, { question: "如何使用" }, { question: "无法换车" }, { question: "信用评分" }, { question: "意见反馈" }]
+    commonQuestions: [{ question: "常见问题" }, { question: "如何使用" }, { question: "如何导航" }, { question: "信用评分" }, { question: "意见反馈" }]
   },
 
   /**

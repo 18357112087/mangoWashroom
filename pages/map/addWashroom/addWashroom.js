@@ -236,20 +236,23 @@ Page({
 
   // 提交到服务器
   formSubmit: function (e) {
-    var that = this;
-    that.mapCtx = wx.createMapContext("map"); // 如果有初始化mapCtx，这里可以省略
-    that.mapCtx.getCenterLocation({
-      success: function (res) {
-        let curLatitude = res.latitude;
-        let curLongitude = res.longitude;
-        console.log(curLatitude)
-        console.log(curLongitude)
-        // 通过获取的经纬度进行请求数据
-        AddWashroomHelper.uploadWashroom(this.data.title, this.data.address, curLatitude, curLongitude)
-        console.log("back")
-       // that.showToast()
-      }
-    })
+    wx.navigateTo({
+      url: '../../me/warn/index'
+    });
+    // var that = this;
+    // that.mapCtx = wx.createMapContext("map"); // 如果有初始化mapCtx，这里可以省略
+    // that.mapCtx.getCenterLocation({
+    //   success: function (res) {
+    //     let curLatitude = res.latitude;
+    //     let curLongitude = res.longitude;
+    //     console.log(curLatitude)
+    //     console.log(curLongitude)
+    //     // 通过获取的经纬度进行请求数据
+    //     AddWashroomHelper.uploadWashroom(this.data.title, this.data.address, curLatitude, curLongitude)
+    //     console.log("back")
+    //    // that.showToast()
+    //   }
+    // })
   }
 })
 

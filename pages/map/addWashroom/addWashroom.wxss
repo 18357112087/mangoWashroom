@@ -68,13 +68,12 @@ addCommentButton{
 
 .canvas {
   
-  width: 324px;
-  height: 154px;
+  height: 50px;
+  left:0;
+  right:0;
   bottom: 0;
   position: fixed;
   background-color: #fff;
-  margin-left: 20px;
-  margin-right: 20px;
   align-items: center;
   justify-content: center;
 }
@@ -106,7 +105,7 @@ addCommentButton{
 width:100%;
 color:white;
 position:fixed;
-bottom:0;
+/* bottom:0; */
 
  background:green; 
 } 

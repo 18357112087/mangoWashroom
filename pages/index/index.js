@@ -202,7 +202,7 @@ Page({
   },
   addComment(){
      wx.navigateTo({
-          url: '../warn/index'
+          url: '../me/warn/index'
         });
   },
 // 页面显示
