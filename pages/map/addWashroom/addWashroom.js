@@ -51,7 +51,23 @@ Page({
   },
 // 页面加载
   onLoad: function (options) {
+    // 1.创建地图上下文，移动当前位置到地图中心
+    this.mapCtx = wx.createMapContext("ofoMap");
+    this.movetoPosition()
     var that = this
+    
+    that.mapCtx.getCenterLocation({
+      success: function (res) {
+        let curLatitude = res.latitude;
+        let curLongitude = res.longitude;
+        console.log(curLatitude)
+        console.log(curLongitude)
+        // 通过获取的经纬度进行请求数据
+        AddWashroomHelper.uploadWashroom(this.data.title, this.data.address, curLatitude, curLongitude)
+        console.log("back")
+        // that.showToast()
+      }
+    })
     // 2.获取并设置当前位置经纬度
     wx.getLocation({
       type: "gcj02",
@@ -152,9 +168,7 @@ Page({
 
 // 页面显示
   onShow: function(){
-    // 1.创建地图上下文，移动当前位置到地图中心
-    this.mapCtx = wx.createMapContext("ofoMap");
-    this.movetoPosition()
+   
   },
 // 地图控件点击事件
   bindcontroltap: function(e){
@@ -187,10 +201,8 @@ Page({
     var that = this
     // 拖动地图，获取附件单车位置
     if(e.type == "begin"){
-     
     // 停止拖动，显示单车位置
     }else if(e.type == "end"){
-     
         this.setData({
           //markers: this.data._markers
         })
@@ -203,12 +215,7 @@ Page({
   movetoPosition: function(){
     this.mapCtx.moveToLocation();
   },
-
-  // 提交到服务器
-  formSubmit: function (e) {
-
-    AddWashroomHelper.uploadWashroom(this.data.title,this.data.address,this.data.latitude,this.data.longitude)
-    console.log("back")
+  showToast:function(){
     wx.showToast({
       title: AddWashroomHelper.backMessage,
       icon: 'success',
@@ -225,5 +232,24 @@ Page({
           })
         }
       }
-    })}
+    })},
+
+  // 提交到服务器
+  formSubmit: function (e) {
+    var that = this;
+    that.mapCtx = wx.createMapContext("map"); // 如果有初始化mapCtx，这里可以省略
+    that.mapCtx.getCenterLocation({
+      success: function (res) {
+        let curLatitude = res.latitude;
+        let curLongitude = res.longitude;
+        console.log(curLatitude)
+        console.log(curLongitude)
+        // 通过获取的经纬度进行请求数据
+        AddWashroomHelper.uploadWashroom(this.data.title, this.data.address, curLatitude, curLongitude)
+        console.log("back")
+       // that.showToast()
+      }
+    })
+  }
 })
+

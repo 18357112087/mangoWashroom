@@ -3,12 +3,15 @@
   <map id="ofoMap"
   latitude="{{latitude}}" longitude="{{longitude}}" scale="{{scale}}" controls="{{controls}}"bindregionchange="bindregionchange"  bindmarkertap="bindmarkertap"  bindcontroltap="bindcontroltap" show-location>
   <button open-type='getUserInfo' >将定位点位置在厕所所在位置</button>
+  <input>标题</input>
+  <input>地址</input>
   <!-- <cover-view>
    <button class="expandSearchAreaButton" bindtap="expandSearchArea">扩大搜索范围</button></cover-view>
       -->
+      <button bindtap="formSubmit" class='submit-btn'>提交</button>
       <cover-view class="hiddenButtonContainer">
       <!-- <button bindtap="hideParkingLot">只看厕所</button> -->
-      <button bindtap="formSubmit" class='submit-btn'>提交</button>
+      
      <!-- <button bindtap="hideWashroom">只看停车场</button> -->
      </cover-view>
     <!-- <cover-view class="canvas"   hidden="{{hiddenName}}">
@@ -30,8 +33,5 @@
                 <input class='input' value='{{inputModel}}' focus='{{inputFocus}}' bindblur='blurInput'></input>
             </cover-view> -->
             <!-- cover-input伪代码实现 -->s
-
   </map>
-  
-  
 </view>
