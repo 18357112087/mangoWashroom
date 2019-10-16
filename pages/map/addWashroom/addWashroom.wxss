@@ -104,10 +104,11 @@ addCommentButton{
 .submit-btn
 {
 width:100%;
-color:green;
+color:white;
 position:fixed;
 bottom:0;
-/* background:green; */
+
+ background:green; 
 } 
 .action .action-input{
 	padding-left: 50rpx;
