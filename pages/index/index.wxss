@@ -4,6 +4,7 @@
 }
 .closeButtonContainer{
   display: flex;
+  border-radius: 98rpx;
 
   
 }
@@ -67,7 +68,6 @@ addCommentButton{
 }
 
 .canvas {
-  
   width: 324px;
   height: 154px;
   bottom: 0;
@@ -77,6 +77,10 @@ addCommentButton{
   margin-right: 20px;
   align-items: center;
   justify-content: center;
+  /* opacity:0.8; */
+  /* opacity:0.8; */
+   /* border-radius: 100rpx; */
+
 }
 
 .cover-view {

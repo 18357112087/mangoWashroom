@@ -1,0 +1,20 @@
+<view class='container'>
+  <block wx:for="{{parkingLots}}" wx:key="item.id" bindtap='itemClick' data-index='{{item.id}}' data-id='{{item.id}}'wx:for-item="item">
+  
+   
+      <!-- <image src='{{item.iconPath}}' ></image> -->
+ <view class='wordButton'>
+    <view>
+      <view class='title' >{{item.title}}|{{item.distance}}米</view>
+      <view  class = 'address'>{{item.address}}</view>
+      <!-- <view>活动：{{item.activity}}</view> -->
+    
+    </view>
+      <button id='{{item.id}}'class="navigationButton" bindtap="navigation">导航</button>
+
+    </view>
+    <view class="divLine"></view>
+  
+     
+  </block>
+</view>

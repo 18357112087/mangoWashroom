@@ -63,11 +63,9 @@ addCommentButton{
   right: 0;
   top: 200;
   color:cornflowerblue;
-
 }
 
 .canvas {
-  
   height: 50px;
   left:0;
   right:0;

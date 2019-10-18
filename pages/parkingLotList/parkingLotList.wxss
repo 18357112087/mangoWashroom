@@ -1,0 +1,33 @@
+/* pages/washroomList/washroomList.wxss */
+.navigationButton{
+  left: 0;
+  right: 0;
+  color:cornflowerblue;
+  border-radius: 98rpx;
+  width: 40%;
+}
+.navigationButton::after {
+  justify-content: right;
+  border-radius: 98rpx;
+}
+.wordButton{
+  flex-direction: row;
+  display: flex;
+    align-items: center;
+      justify-content: right;
+}
+.title{
+  font-size:15px
+
+ 
+}
+.address{
+  font-size:10px
+}
+
+/*分割线样式*/
+.divLine{
+ background: #E0E3DA;
+ width: 100%;
+ height: 5rpx;
+}

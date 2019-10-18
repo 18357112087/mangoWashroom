@@ -14,13 +14,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var array = [1, 4, -8, -3, 6, 12, 9, 8];
-    console.log(app.globalData.washrooms)
     QQMapSDK.sort(app.globalData.washrooms)
     this.setData({
       washrooms: app.globalData.washrooms,
     })
-   let that = this
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

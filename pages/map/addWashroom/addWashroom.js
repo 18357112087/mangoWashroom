@@ -1,6 +1,7 @@
 //index.js
  const AVLeanCloud = require('../../../utils/av-weapp-min-leancloud.js');
 const AddWashroomHelper = require('../../../model/AddWashRoomHelper.js')
+const WashroomDataBase = require('../../../model/WashroomsDatabase.js')
 //MarkerHelper.downloadMarker()
 var app = getApp();
 var isEmptyObject = function (e) {
@@ -22,6 +23,7 @@ Page({
     }
   },
   data: {
+    washroomId:"",
     //marker distance to the userLocation
     distance:0,
     bType: "primary", // 按钮类型
@@ -56,18 +58,18 @@ Page({
     this.movetoPosition()
     var that = this
     
-    that.mapCtx.getCenterLocation({
-      success: function (res) {
-        let curLatitude = res.latitude;
-        let curLongitude = res.longitude;
-        console.log(curLatitude)
-        console.log(curLongitude)
-        // 通过获取的经纬度进行请求数据
-        AddWashroomHelper.uploadWashroom(this.data.title, this.data.address, curLatitude, curLongitude)
-        console.log("back")
-        // that.showToast()
-      }
-    })
+    // that.mapCtx.getCenterLocation({
+    //   success: function (res) {
+    //     let curLatitude = res.latitude;
+    //     let curLongitude = res.longitude;
+    //     console.log(curLatitude)
+    //     console.log(curLongitude)
+    //     // 通过获取的经纬度进行请求数据
+    //     AddWashroomHelper.uploadWashroom(this.data.title, this.data.address, curLatitude, curLongitude)
+    //     console.log("back")
+    //     // that.showToast()
+       
+    
     // 2.获取并设置当前位置经纬度
     wx.getLocation({
       type: "gcj02",
@@ -104,28 +106,6 @@ Page({
             },
             clickable: true
           },
-          // {
-          //   id: 2,
-          //   iconPath: '/images/use.png',
-          //   position: {
-          //     left: res.windowWidth/2 - 45,
-          //     top: res.windowHeight - 100,
-          //     width: 90,
-          //     height: 90
-          //   },
-          //   clickable: true
-          // },
-          // {
-          //   id: 3,
-          //   iconPath: '/images/warn.png',
-          //   position: {
-          //     left: res.windowWidth - 70,
-          //     top: res.windowHeight - 80,
-          //     width: 50,
-          //     height: 50
-          //   },
-          //   clickable: true
-          // },
           {
             id: 4,
             iconPath: '/images/marker.png',
@@ -137,28 +117,6 @@ Page({
             },
             clickable: true
           },
-          // {
-          //   id: 5,
-          //   iconPath: '/images/avatar.png',
-          //   position: {
-          //     left: res.windowWidth - 68,
-          //     top: res.windowHeight - 155,
-          //     width: 45,
-          //     height: 45
-          //   },
-          //   clickable: true
-          //   }
-            // , {
-            //   id: 6,
-            //   iconPath: '/images/location.png',
-            //   position: {
-            //     left: res.windowWidth/2-30,
-            //    top: res.windowHeight - 100,
-            //    width: 200,
-            //    height: 80
-            //   },
-            //   clickable: true
-            // }
           
           ]
         })
@@ -236,23 +194,20 @@ Page({
 
   // 提交到服务器
   formSubmit: function (e) {
-    wx.navigateTo({
-      url: '../../me/warn/index'
-    });
-    // var that = this;
-    // that.mapCtx = wx.createMapContext("map"); // 如果有初始化mapCtx，这里可以省略
-    // that.mapCtx.getCenterLocation({
-    //   success: function (res) {
-    //     let curLatitude = res.latitude;
-    //     let curLongitude = res.longitude;
-    //     console.log(curLatitude)
-    //     console.log(curLongitude)
-    //     // 通过获取的经纬度进行请求数据
-    //     AddWashroomHelper.uploadWashroom(this.data.title, this.data.address, curLatitude, curLongitude)
-    //     console.log("back")
-    //    // that.showToast()
-    //   }
-    // })
-  }
+    var that = this;
+    console.log("haha")
+    that.mapCtx.getCenterLocation({
+      success: function (res) {
+        var data = { "latitude": res.latitude,"longitude":res.longitude}
+        console.log(data)
+        wx.navigateTo({
+          url: '../../me/warn/index?latitude=' + data.latitude + '&longitude=' + data.longitude
+        });
+        
+      }
+    })
+  },
+
+ 
 })
 

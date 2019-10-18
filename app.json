@@ -1,8 +1,7 @@
 {
   "pages": [
-          "pages/map/addWashroom/addWashroom",
-    "pages/index/index",
-    "pages/washroomList/washroomList",
+              "pages/index/index","pages/map/addWashroom/addWashroom",
+"pages/washroomList/washroomList",
     "pages/me/warn/index",
     "pages/me/scanresult/index",
     "pages/me/billing/index",
@@ -11,7 +10,9 @@
     "pages/me/charge/index",
     "pages/me/logs/logs",
     "pages/washroomList/warn/index",
-"pages/map/customerService/customerService"
+    "pages/list/oilPriceList",
+"pages/map/customerService/customerService",
+"pages/parkingLotList/parkingLotList"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -37,9 +38,21 @@
       },
       {
         "pagePath": "pages/washroomList/washroomList",
-        "text": "列表",
+        "text": "厕所列表",
         "iconPath": "/images/washroomLogo2.png",
         "selectedIconPath": "/images/washroomLogo2.png"
+      },
+      {
+        "pagePath": "pages/parkingLotList/parkingLotList",
+        "text": "停车场列表",
+        "iconPath": "/images/parkingLot.jpg",
+        "selectedIconPath": "/images/parkingLot.jpg"
+      },
+      {
+        "pagePath": "pages/list/oilPriceList",
+        "text": "加油站列表",
+        "iconPath": "/images/petrolStation.jpg",
+        "selectedIconPath": "/images/petrolStation.jpg"
       },
       {
         "pagePath": "pages/me/my/index",
