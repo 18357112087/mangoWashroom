@@ -1,7 +1,8 @@
 // pages/wallet/index.js
 const AV = require('../../../utils/av-weapp-min.js'); 
 const WashroomHelper = require('../../../model/WashroomHelper.js')
-const AVLeanCloud = require('../../../utils/av-weapp-min.js');
+const AVLeanCloud = require('../../../utils/av-weapp-min.js')
+const WashroomDatabse = require('../../../model/WashroomsDatabase.js');
 var app = getApp();
 Page({
   data:{

@@ -1,6 +1,7 @@
 var app = getApp();
 var titles = []
 const QQMapSDK = require('../../model/qqMapSDK.js')
+const WashroomDatabse = require('../../model/WashroomsDatabase.js')
 Page({
   /**
    * 页面的初始数据

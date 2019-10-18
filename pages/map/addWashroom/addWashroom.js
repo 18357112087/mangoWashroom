@@ -201,7 +201,7 @@ Page({
         var data = { "latitude": res.latitude,"longitude":res.longitude}
         console.log(data)
         wx.navigateTo({
-          url: '../../me/warn/index?latitude=' + data.latitude + '&longitude=' + data.longitude
+          url: '../../washroomList/warn/index?latitude=' + data.latitude + '&longitude=' + data.longitude
         });
         
       }
