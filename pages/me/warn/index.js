@@ -124,8 +124,9 @@ Page({
       //     })
       //   }
       // })
+      
     var data = {"latitude":that.data.latitude,"longitude":that.data.longitude,
-"title":that.data.title,"address":that.data.address}
+      "title": that.data.title, "address": that.data.address, "picUrls":this.data.picUrls,"tagList": this.data.tagList}
     WashroomDatabase.onAdd(data,function(message,res){
           console.log(message)
           console.log(res)

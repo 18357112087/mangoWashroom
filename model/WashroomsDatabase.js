@@ -3,9 +3,12 @@ module.exports.onAdd=function (data,fn) {
   const db = wx.cloud.database()
   db.collection('washrooms').add({
     data: {
-      //title: that.data.title
+      title: data.title,
+      address:data.address,
       latitude:data.latitude,
-      longitude:data.longitude
+      longitude:data.longitude,
+      tagList:data.tagList,
+      picUrls:data.picUrls
     },
     success: res => {
       // 在返回结果中会包含新创建的记录的 _id
