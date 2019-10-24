@@ -143,15 +143,66 @@ module.exports.nextStep=function () {
       console.log('https://developers.weixin.qq.com/miniprogram/dev/wxcloud/guide/database.html')
       console.groupEnd()
     }
-
     this.setData({
       step: this.data.step + 1
     }, callback)
   }
 },
-
 module.exports.prevStep=function () {
   this.setData({
     step: this.data.step - 1
   })
+}
+// 上传图片
+module.exports.doUpload = function (filePaths,fn) {
+  var fileIDs = []
+  var count = 0
+  for(var i = 0;i<filePaths.length;i++){
+    var successUp = 0
+    var failUp = 0
+       const cloudPath = 'washroom-image' +i+filePaths[i].match(/\.[^.]+?$/)[0]
+      wx.cloud.uploadFile({
+        cloudPath,
+        filePath:filePaths[i],
+        success: res => {
+          console.log('[上传文件] 成功：', res)
+          console.log(res.fileID)
+          fileIDs.push(res.fileID)
+          successUp++
+        },
+        fail: e => {
+          console.error('[上传文件] 失败：', e)
+          fn("fail", e)
+          failUp++
+        },
+        complete: () => {
+          count++
+          console.log("count:"+count)
+          if (count == filePaths.length) {
+            //上传完毕，作一下提示
+            console.log('上传成功' + successUp + ',' + '失败' + failUp);
+            fn("success", res,successUp,fileIDs)
+          } else {
+            //递归调用，上传下一张
+            console.log('正在上传第' + i + '张');
+          }
+          wx.hideLoading()
+        }
+      })
+  }
+
+}
+module.exports.getTempFileURL=function(fileIDs,fn){
+wx.cloud.getTempFileURL({
+  fileList: fileIDs,
+  success: res => {
+    // get temp file URL
+    fn("success",res)
+    console.log(res.fileList)
+  },
+  fail: err => {
+    // handle error
+    fn("fail", res)
+  }
+})
 }

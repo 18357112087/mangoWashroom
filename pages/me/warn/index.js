@@ -181,13 +181,36 @@ Page({
           });
         };
         var tempFilePath = res.tempFilePaths[0];
-        new AV.File('pictrue', {
-          blob: {
-            uri: tempFilePath,
-          },
-        }).save().then(
-          file => console.log(file.url())
-        ).catch(console.error);
+        WashroomDatabase.doUpload(res.tempFilePaths,function(message,res,successUp,fileIDs){
+          console.log(message)
+          if(message=="success"){
+            wx.showToast({
+              title: '上传成功' + successUp,
+              icon: 'success',
+              duration: 2000
+            })
+
+            WashroomDatabase.getTempFileURL(fileIDs,function(message,res){
+              console.log(res.filList)
+            })
+          }
+          else{
+            wx.showToast({
+              title: '上传成功' + successUp,
+              icon: 'fail',
+              duration: 2000
+            })
+
+          }
+
+        })
+        // new AV.File('pictrue', {
+        //   blob: {
+        //     uri: tempFilePath,
+        //   },
+        // }).save().then(
+        //   file => console.log(file.url())
+        // ).catch(console.error);
       }
     })
   },
