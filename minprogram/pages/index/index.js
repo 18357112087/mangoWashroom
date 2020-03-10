@@ -51,9 +51,51 @@ Page({
       washroomList: tmp
     })
   },
+  getMarkers(location){
+    var that = this
+    // 2.获取并设置当前位置经纬度
+    WashroomsDB.onQueryGeo(location).then(res => {
+          QQMapSDK.parseWashroomData(res, app.globalData.userLocation).then(message => {
+            console.log(message)
+            console.log(QQMapSDK.washroommMarkers)
+            that.setData({
+              markers: QQMapSDK.washroomMarkers
+            })
+          })
+        })
+    QQMapSDK.qqMapSDKSearch('厕所', location, function () {
+          that.setData({
+            //markers: MarkerHelper.newMarkers,
+            markers: QQMapSDK.wholeMarkers,
+            washroommMarkers: QQMapSDK.washroomMarkers
+          })
+          app.globalData.washrooms = QQMapSDK.washroomMarkers
+          that.loadList()
+          QQMapSDK.qqMapSDKSearch('加油站', location, function () {
+            that.setData({
+              //markers: MarkerHelper.newMarkers,
+              markers: QQMapSDK.wholeMarkers,
+              oilStationMarkers: QQMapSDK.oilStationMarkers
+            })
+            app.globalData.oilStations = QQMapSDK.oilStationMarkers,
+              QQMapSDK.qqMapSDKSearch('停车场', location, function () {
+                that.setData({
+                  markers: QQMapSDK.wholeMarkers,
+                  parkingLotMarkers: QQMapSDK.parkingLotMarkers
+                })
+                app.globalData.parkingLots = QQMapSDK.parkingLotMarkers
+              })
+          })
+
+        })
+      },
+    
+
+  
 // 页面加载
   onLoad: function (options) {
     // 获取用户信息
+    var that = this 
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
@@ -69,6 +111,22 @@ Page({
         }
       }
     })
+    wx.getLocation({
+      type: "gcj02",
+      success: (res) => {
+        var userLocationTmp ={
+          "latitude": res.latitude,
+          "longitude": res.longitude
+        }
+        this.setData({
+          longitude: res.longitude,
+          latitude: res.latitude,
+          userLocation: userLocationTmp
+        })
+        app.globalData.userLocation = userLocationTmp
+        this.getMarkers(userLocationTmp)
+      }})
+   
     wx.getStorage({
       key: 'userInfo',
       // 能获取到则显示用户信息，并保持登录状态，不能就什么也不做
@@ -85,88 +143,13 @@ Page({
         })
       }
     });
-    var that = this
-    // 2.获取并设置当前位置经纬度
-    wx.getLocation({
-      type: "gcj02",
-      success: (res) => {
-        this.setData({
-          longitude: res.longitude,
-          latitude: res.latitude,
-          userLocation:{
-            "latitude":res.latitude,
-            "longitude": res.longitude}
-        })
-        app.globalData.userLocation = this.data.userLocation
-        WashroomsDB.onQueryGeo(this.data.userLocation,function(message,res){
-          console.log(message)
-          var tmp = that.data.markers
-          console.log("res",res.data)
-          console.log("markers", that.data.markers)
-          res.data.forEach(result => {
-            let newMarker = {
-              id: result._id,
-              latitude: result.location.latitude,
-              longitude: result.location.longitude,
-              width: 40,
-              height: 40,
-              iconPath: "../../images/washroomLogo2.png",
-              title: result.title,
-              address: result.address,
-             // distance: dis[j]
-            }
-            tmp.push(newMarker)
-          });
-          console.log("tmp",tmp)
-          this.setData({
-            markers:tmp
-          })
-          console.log(tmp)
-          console.log(res)
-
-        })
-          
-        
-        QQMapSDK.qqMapSDKSearch('厕所', that.data.userLocation, function () {
-          that.setData({
-            //markers: MarkerHelper.newMarkers,
-            markers: QQMapSDK.wholeMarkers,
-            washroommMarkers: QQMapSDK.washroomMarkers
-          })
-          app.globalData.washrooms = QQMapSDK.washroomMarkers
-          that.loadList()
-          QQMapSDK.qqMapSDKSearch('加油站', that.data.userLocation, function () {
-            that.setData({
-              //markers: MarkerHelper.newMarkers,
-              markers: QQMapSDK.wholeMarkers,
-              oilStationMarkers: QQMapSDK.oilStationMarkers
-            })
-            app.globalData.oilStations = QQMapSDK.oilStationMarkers,
-             QQMapSDK.qqMapSDKSearch('停车场', that.data.userLocation, function () {
-          that.setData({
-            markers: QQMapSDK.wholeMarkers,
-            parkingLotMarkers: QQMapSDK.parkingLotMarkers
-          })
-               app.globalData.parkingLots = QQMapSDK.parkingLotMarkers
-        })
-          })
-          // wx.showActionSheet({
-          //   itemList: ['A', 'B', 'C'],
-          //   success: function (res) {
-          //     if (!res.cancel) {
-          //       console.log(res.tapIndex)
-          //     }
-          //   }
-          // })  
-        })
-      }
-    }),
+    
     // 3.设置地图控件的位置及大小，通过设备宽高定位
     wx.getSystemInfo({
       success: (res) => {
-        console.log(res)
+        //console.log(res)
         Controls.setControls(res, function (controls){
-          console.log(Controls.controls)
+         // console.log(Controls.controls)
           that.setData({controls: controls})
         })}})
   },
@@ -239,21 +222,26 @@ Page({
     })
 
   },
+  //扩大搜索范围
   expandSearchArea() {
     var that = this
     that.mapCtx.getCenterLocation({
       success: function (res) {
         var data = { "latitude": res.latitude, "longitude": res.longitude }
         console.log('pin location',res)
-    QQMapSDK.qqMapSDKSearch('厕所',data,function () {
-        console.log('扩大搜索范围')
-      console.log(QQMapSDK.washroomMarkers)
-        that.setData({
-          //markers: MarkerHelper.newMarkers,
-          markers: QQMapSDK.washroomMarkers
-        })
-      app.globalData.washrooms = QQMapSDK.washroomMarkers
-      })
+        that.getMarkers(data)
+    // QQMapSDK.qqMapSDKSearch('厕所',data,function () {
+    //     console.log('扩大搜索范围')
+    //   console.log(QQMapSDK.washroomMarkers)
+    //   var tmp = that.data.markers
+    //   QQMapSDK.washroomMarkers.forEach(marker => tmp.push(marker))
+    //   console.log(tmp)
+    //     that.setData({
+    //       //markers: MarkerHelper.newMarkers,
+    //       markers:tmp
+    //     })
+    //   app.globalData.washrooms = QQMapSDK.washroomMarkers
+    //   })
       }
     })
   },
@@ -307,17 +295,16 @@ Page({
   bindregionchange: function(e){
    // console.log(e)
     var that = this
-    console.log('视野改变')
-    console.log('e',e)
+   // console.log('视野改变')
     // 拖动地图，获取附件单车位置
     if(e.type == "begin"){
      
     // 停止拖动，显示单车位置
     }else if(e.type == "end"){
-      that.expandSearchArea()
-        this.setData({
-          //markers: this.data._markers
-        })
+      // that.expandSearchArea()
+      //   this.setData({
+      //     //markers: this.data._markers
+      //   })
     }
   },
   //按关闭关闭窗口

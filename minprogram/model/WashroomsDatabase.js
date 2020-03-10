@@ -38,24 +38,27 @@ module.exports.onAddComments = function (data, fn) {
     
 //根据地理位置搜索
 module.exports.onQueryGeo=function (location,fn) {
+  return new Promise((resolve,reject)=>{
   const db = wx.cloud.database()
   console.log(location)
-  // 查询当前用户所有的 counters
+  // 查询当前用户所有的 washrooms
   db.collection('washrooms').where({
     location: db.command.geoNear({
       geometry: db.Geo.Point(location.longitude,location.latitude),
-      minDistance: 1000,
+      minDistance: 0,
       maxDistance: 20000,
     })
   }).get({
     success: res => {
-      fn("success",res)
+      resolve(res)
       console.log('根据[数据库] [查询记录] 成功: ', res)
     },
     fail: err => {
-      fn("fail",err)
+      reject(error)
       console.error('[数据库] [查询记录] 失败：', err)
     }
+  })
+
   })
 },
 

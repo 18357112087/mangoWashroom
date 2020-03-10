@@ -18,60 +18,94 @@ var dis1 = []
 //事件触发，调用接口
 
 module.exports.getDataFromDataBase=function(){
-  // 1. 获取数据库引用
   const db = wx.cloud.database()
-  // 2. 构造查询语句
-  // collection 方法获取一个集合的引用
-  // where 方法传入一个对象，数据库返回集合中字段等于指定值的 JSON 文档。API 也支持高级的查询条件（比如大于、小于、in 等），具体见文档查看支持列表
-  // get 方法会触发网络请求，往数据库取数据
   db.collection('Washrooms').where({
     address:"三桥下"
   }).get({
     success: function (res) {
-      // 输出 [{ "title": "The Catcher in the Rye", ... }]
       console.log(res)
     }
   })
 }
 function calculateDistance(start, dest, fn){
-  var _this = this;
-  //调用距离计算接口
-  qqmapsdk.calculateDistance({
-    mode: 'walking',//可选值：'driving'（驾车）、'walking'（步行），不填默认：'walking',可不填
-    //from参数不填默认当前地址
-    //获取表单提交的经纬度并设置from和to参数（示例为string格式）
-    from: start || '', //若起点有数据则采用起点坐标，若为空默认当前地址
-    to: dest, //终点坐标
-    success: function (res) {//成功后的回调
-      //console.log(res);
-      var res = res.result;
-      for (var i = 0; i < res.elements.length; i++) {
-        dis.push(res.elements[i].distance); //将返回数据存入dis数组，
+  var dis = []
+  return new Promise(function (resolve, reject){
+    var _this = this;
+    //调用距离计算接口
+    qqmapsdk.calculateDistance({
+      mode: 'walking',
+      from: start || '', //若起点有数据则采用起点坐标，若为空默认当前地址
+      to: dest, //终点坐标
+      success: function (res) {//成功后的回调
+        //console.log(res);
+        var res = res.result;
+        for (var i = 0; i < res.elements.length; i++) {
+          dis.push(res.elements[i].distance); //将返回数据存入dis数组，
+        }
+        resolve(dis)
+      },
+      fail: function (error) {
+        console.error(error);
+        reject(error)
+      },
+      complete: function (res) {
+        // console.log(res);
       }
-      //dis[0] = res.elements[0].distance
-      fn()
-      // _this.setData({ //设置并更新distance数据
-      //   distance: dis
-      // });
-    },
-    fail: function (error) {
-      console.error(error);
-    },
-    complete: function (res) {
-     // console.log(res);
-    }
-  });
+    });
+
+  })
 }
-var j = 0
-function parseWashroomData(results,userLocation,fn){
+
+//public version
+module.exports.parseWashroomData = function parseWashroomData(results, userLocation, fn) {
+  return new Promise((resolve,reject)=>{
+  var j = 0
+  var start = userLocation
+  var dest = []
+  console.log(results);
+  results.data.forEach(
+    washroom=> dest.push({ latitude: washroom.location.latitude, longitude: washroom.location.longitude })
+  )
+  calculateDistance(start, dest).then(dis=>{
+    console.log('dis',dis)
+    console.log('results',results)
+    results.data.forEach(result=>{
+      let newMarker = {
+        id: result._id,
+        latitude: result.location.latitude,
+        longitude: result.location.longitude,
+        width: 40,
+        height: 40,
+        iconPath: "../../images/washroomLogo2.png",
+        title: result.title,
+        address: result.address,
+        distance: dis[j]
+      }
+      washroomMarkers.push(newMarker)
+      wholeMarkers.push(newMarker)
+      j++
+    }) 
+     console.log('数据库 markers:',washroomMarkers)
+    resolve('success')
+    
+  }).catch(error=>console.log(error))
+
+  })
+
+  }
+
+
+ function parseWashroomData(results,userLocation,fn){
+   var j = 0
   var start = userLocation
   var dest = []
   console.log(results);
   for (let washroom of results.data) {
     dest.push({ latitude: washroom.location.lat, longitude: washroom.location.lng })
   }
-  calculateDistance(start, dest, function () {
-    for (let result of results.data) {
+  calculateDistance(start, dest).then(dis=>{
+    results.data.forEach(result => {
+      console.log('result',result)
       let newMarker = {
         id: result.id,
         latitude: result.location.lat,
@@ -86,13 +120,14 @@ function parseWashroomData(results,userLocation,fn){
       washroomMarkers.push(newMarker)
       wholeMarkers.push(newMarker)
       j++
-    }
-   // console.log(washroomMarkers)
+    })
+    console.log('腾讯地图api markers:',washroomMarkers)
     fn()
   })
-  
+ 
 }
 function parseParkingLotData(results,userLocation,fn) {
+  var j = 0
   var start = userLocation
   var dest = []
   //console.log(e);
@@ -126,6 +161,7 @@ function parseParkingLotData(results,userLocation,fn) {
 
 //将加油站数据做成markers 
 function parseOilStationData(results, userLocation, fn) {
+  var j = 0
   //获取油价数据
   wx.request({
     url: 'https://www.icauto.com.cn/oil/',
