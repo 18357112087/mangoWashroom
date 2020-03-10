@@ -1,0 +1,26 @@
+<!--index.wxml-->
+<view class="container">
+  <map id="ofoMap"
+  latitude="{{latitude}}" longitude="{{longitude}}" scale="{{scale}}" controls="{{controls}}"bindregionchange="bindregionchange"  bindmarkertap="bindmarkertap"  bindcontroltap="bindcontroltap" show-location>
+  <button open-type='getUserInfo' >将定位点位置在厕所所在位置</button>
+  <!-- <cover-view>
+   <button class="expandSearchAreaButton" bindtap="expandSearchArea">扩大搜索范围</button></cover-view>
+      -->
+
+      <cover-view class="hiddenButtonContainer">
+      <!-- <button bindtap="hideParkingLot">只看厕所</button> -->
+      
+     <!-- <button bindtap="hideWashroom">只看停车场</button> -->
+     </cover-view>
+    <cover-view class="canvas"   hidden="{{hiddenName}}">
+        <button bindtap="formSubmit" class='submit-btn'>确定</button>
+</cover-view> 
+ <!-- cover-input伪代码实现 -->
+            <!-- <cover-view class='cover-input' bindtap='tapInput'>
+            
+                <cover-view class='text'>{{inputInfo}}</cover-view>
+                <input class='input' value='{{inputModel}}' focus='{{inputFocus}}' bindblur='blurInput'></input>
+            </cover-view> -->
+            <!-- cover-input伪代码实现 -->
+  </map>
+</view>

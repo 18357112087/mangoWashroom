@@ -1,0 +1,22 @@
+<!--pages/my/index.wxml-->
+<view class="container">
+     <view class="header">
+        <!-- <image src="{{thumb}}" class="thumb"></image> -->
+        <view class="thumb">
+          <open-data type="userAvatarUrl"></open-data>
+        </view>
+        <view class='nickname'>
+          <open-data type="userNickName"></open-data>
+        </view>
+        <!-- <text class="nickname">{{nickname}}</text> -->
+    </view>
+    <!-- <block wx:if="{{userInfo.avatarUrl != ''}}"> -->
+    <view class="my-wallet tapbar" bindtap="movetoWallet">
+        <text>我的钱包</text>
+        <text>></text>
+    </view>
+    <!-- </block> -->
+  
+    <!-- <button bindtap="bindAction" class="btn-login" hover-class="gray" type="{{bType}}" >{{actionText}}</button> -->
+      <button bindgetphonenumber="getPhoneNumber" open-type="getPhoneNumber">获取号码</button>
+</view>
