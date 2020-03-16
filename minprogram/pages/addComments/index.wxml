@@ -23,6 +23,17 @@
         </block>
             <text class="add" bindtap="bindCamera">{{actionText}}</text>
         </view>
+
+          <view class="weui-cells__title">备注</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <textarea class="weui-textarea" placeholder="请输入" style="height: 3.3em" value="{{textInput}}" bindinput="inputText" />
+                    <view class="weui-textarea-counter">0/200</view>
+                </view>
+            </view>
+        </view>
+
         
         <view class="action-submit">
             <button class="submit-btn" type="default" loading="{{loading}}" bindtap="formSubmit" style="background-color: {{btnBgc}}">提交</button>

@@ -3,6 +3,7 @@ const WashroomDatabase = require('../../model/WashroomsDatabase.js')
 var app = getApp()
 Page({
   data: {
+    textInput:"",
     washroomId:'',
     // 故障车周围环境图路径数组
     picUrls: [],
@@ -104,6 +105,14 @@ Page({
       
     })
   },
+  inputText(e){
+    var that = this
+    console.log(e)
+    this.setData({
+      textInput: e.detail.value,
+     
+    })
+  },
   // 提交到服务器
   formSubmit: function (e) {
     var that = this
@@ -113,23 +122,24 @@ Page({
       commentText: this.data.commentText,
       checkboxValue: this.data.checkboxValue,
       picUrls: this.data.picUrls,
-      username: app.globalData.userInfo.username
+      username: app.globalData.userInfo.username,
+      textInput: this.data.textInput
     }
     WashroomDatabase.onAddComments(data,function(message,res){
           console.log(message)
           console.log(res)
           if (message="success"){
             wx.showToast({
-              title: '新增记录成功',
+              title: '评论成功',
             })
-            console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
+            
           }
           else{
             wx.showToast({
               icon: 'none',
-              title: '新增记录失败'
+              title: '评论添加失败'
             })
-            console.error('[数据库] [新增记录] 失败：', res)
+            
           }
         })
 

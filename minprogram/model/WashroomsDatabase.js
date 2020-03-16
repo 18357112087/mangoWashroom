@@ -25,7 +25,8 @@ module.exports.onAddComments = function (data, fn) {
           commentText:data.commentText,
           checkboxValue: data.checkboxValue,
           picUrls: data.picUrls,
-          username: data.username
+          username: data.username,
+          textInput:data.textInput
         },
         success: res => {
           fn("success", res)
